@@ -1,9 +1,9 @@
 import {
   memo,
-  useState,
   type JSX,
   useEffect,
   useContext,
+  useMemo,
   PureComponent,
   type ContextType,
 } from 'react'
@@ -178,8 +178,18 @@ function MarkerClustererFunctional(
     onLoad,
     onUnmount,
   } = props
-  const [instance, setInstance] = useState<Clusterer | null>(null)
+
   const map = useContext<google.maps.Map | null>(MapContext)
+
+  const instance = useMemo(() => {
+    if (!map) return
+
+    const clustererOptions = {
+      ...(options || defaultOptions),
+    }
+
+    return new Clusterer(map, [], clustererOptions);
+  }, [map])
 
   useEffect(() => {
     if (!instance || !onMouseOut) return;
@@ -335,19 +345,7 @@ function MarkerClustererFunctional(
     }
   })
 
-  useEffect(() => {
-    if (!map) return
-
-    const clustererOptions = {
-      ...(options || defaultOptions),
-    }
-
-    const clusterer = new Clusterer(map, [], clustererOptions)
-
-    setInstance(clusterer)
-  }, [])
-
-  return instance !== null ? children(instance) || null : null
+  return instance ? children(instance) || null : null
 }
 
 export const MarkerClustererF = memo(MarkerClustererFunctional)
