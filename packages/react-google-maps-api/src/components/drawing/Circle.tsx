@@ -1,10 +1,10 @@
 import {
   memo,
-  useState,
   useEffect,
   useContext,
   PureComponent,
   type ContextType,
+  useMemo,
 } from 'react'
 
 import {
@@ -135,7 +135,12 @@ function CircleFunctional({
 }: CircleProps): null {
   const map = useContext<google.maps.Map | null>(MapContext)
 
-  const [instance, setInstance] = useState<google.maps.Circle | null>(null)
+  const instance = useMemo(() => {
+    return new google.maps.Circle({
+      ...(options || defaultOptions),
+      map,
+    })
+  }, []);
 
   // Order does matter
    useEffect(() => {
@@ -327,15 +332,6 @@ function CircleFunctional({
       onUnmount(instance);
     }
   }, [instance, onUnmount])
-
-  useEffect(() => {
-    const circle = new google.maps.Circle({
-      ...(options || defaultOptions),
-      map,
-    })
-
-    setInstance(circle)
-  }, [])
 
   return null
 }
