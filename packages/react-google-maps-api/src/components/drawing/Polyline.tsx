@@ -1,10 +1,10 @@
 import {
   memo,
-  useState,
   useEffect,
   useContext,
   PureComponent,
   type ContextType,
+  useMemo,
 } from 'react'
 
 import {
@@ -128,7 +128,12 @@ function PolylineFunctional({
 }: PolylineProps): null {
   const map = useContext<google.maps.Map | null>(MapContext)
 
-  const [instance, setInstance] = useState<google.maps.Polyline | null>(null)
+  const instance = useMemo(() => {
+    return new google.maps.Polyline({
+      ...(options || defaultOptions),
+      map,
+    });
+  }, []);
 
   // Order does matter
   useEffect(() => {
@@ -139,7 +144,7 @@ function PolylineFunctional({
     return () => {
       instance.setMap(null);
     }
-  }, [map])
+  }, [instance, map])
 
   useEffect(() => {
     if (!instance || !options) return;
@@ -294,15 +299,6 @@ function PolylineFunctional({
       onUnmount(instance);
     }
   })
-
-  useEffect(() => {
-    const polyline = new google.maps.Polyline({
-      ...(options || defaultOptions),
-      map,
-    })
-
-    setInstance(polyline)
-  }, [])
 
   return null
 }
