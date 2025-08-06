@@ -547,6 +547,18 @@ function MarkerFunctional({
   }, [instance, map, clusterer, noClustererRedraw])
 
   useEffect(() => {
+    if (!instance || !onLoad) return;
+
+    onLoad(instance);
+  }, [instance, onLoad])
+
+  useEffect(() => {
+    if (!instance || !onUnmount) return;
+
+    onUnmount(instance);
+  }, [instance, onUnmount])
+
+  useEffect(() => {
     const markerOptions = {
       ...(options || defaultOptions),
       ...(clusterer ? defaultOptions : { map }),
@@ -556,16 +568,6 @@ function MarkerFunctional({
     const marker = new google.maps.Marker(markerOptions)
 
     setInstance(marker)
-
-    if (onLoad) {
-      onLoad(marker)
-    }
-
-    return () => {
-      if (onUnmount) {
-        onUnmount(marker)
-      }
-    }
   }, [])
 
   const chx = useMemo<ReactNode | null>(() => {
