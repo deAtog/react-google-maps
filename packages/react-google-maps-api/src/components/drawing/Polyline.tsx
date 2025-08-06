@@ -135,6 +135,10 @@ function PolylineFunctional({
     if (!instance) return;
 
     instance.setMap(map);
+
+    return () => {
+      instance.setMap(null);
+    }
   }, [map])
 
   useEffect(() => {
@@ -278,24 +282,26 @@ function PolylineFunctional({
   }, [instance, onDrag])
 
   useEffect(() => {
+    if (!instance || !onLoad) return;
+
+    onLoad(instance);
+  })
+
+  useEffect(() => {
+    if (!instance || !onUnmount) return;
+
+    return () => {
+      onUnmount(instance);
+    }
+  })
+
+  useEffect(() => {
     const polyline = new google.maps.Polyline({
       ...(options || defaultOptions),
       map,
     })
 
     setInstance(polyline)
-
-    if (onLoad) {
-      onLoad(polyline)
-    }
-
-    return () => {
-      if (onUnmount) {
-        onUnmount(polyline)
-      }
-
-      polyline.setMap(null)
-    }
   }, [])
 
   return null
