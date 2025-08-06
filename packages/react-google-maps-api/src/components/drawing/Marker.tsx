@@ -241,12 +241,6 @@ function MarkerFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (!instance) return;
-
-    instance.setMap(map);
-  }, [map])
-
-  useEffect(() => {
     if (!instance || !options) return;
 
     instance.setOptions(options);
@@ -535,6 +529,24 @@ function MarkerFunctional({
   }, [instance, onZindexChanged])
 
   useEffect(() => {
+    if (!instance) return;
+
+    if (clusterer) {
+      clusterer.addMarker(instance, !!noClustererRedraw)
+    } else {
+      instance.setMap(map)
+    }
+
+    return () => {
+      if (clusterer) {
+        clusterer.removeMarker(instance, !!noClustererRedraw)
+      } else {
+        instance.setMap(null)
+      }
+    }
+  }, [instance, map, clusterer, noClustererRedraw])
+
+  useEffect(() => {
     const markerOptions = {
       ...(options || defaultOptions),
       ...(clusterer ? defaultOptions : { map }),
@@ -542,12 +554,6 @@ function MarkerFunctional({
     }
 
     const marker = new google.maps.Marker(markerOptions)
-
-    if (clusterer) {
-      clusterer.addMarker(marker, !!noClustererRedraw)
-    } else {
-      marker.setMap(map)
-    }
 
     setInstance(marker)
 
@@ -558,12 +564,6 @@ function MarkerFunctional({
     return () => {
       if (onUnmount) {
         onUnmount(marker)
-      }
-
-      if (clusterer) {
-        clusterer.removeMarker(marker, !!noClustererRedraw)
-      } else if (marker) {
-        marker.setMap(null)
       }
     }
   }, [])
