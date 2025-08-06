@@ -185,6 +185,20 @@ function InfoWindowFunctional({
   }, [instance, onZindexChanged])
 
   useEffect(() => {
+    if (!instance || !onLoad) return;
+
+    onLoad(instance);
+  })
+
+  useEffect(() => {
+    if (!instance || !onUnmount) return;
+
+    return () => {
+      onUnmount(instance);
+    }
+  })
+
+  useEffect(() => {
     const infoWindow = new google.maps.InfoWindow(options)
 
     setInstance(infoWindow)
@@ -192,18 +206,6 @@ function InfoWindowFunctional({
     containerElementRef.current = document.createElement('div')
 
     infoWindow.setContent(containerElementRef.current)
-
-    if (onLoad) {
-      onLoad(infoWindow)
-    }
-
-    return () => {
-      if (onUnmount) {
-        onUnmount(infoWindow)
-      }
-
-      infoWindow.close()
-    }
   }, [])
 
   return containerElementRef.current
