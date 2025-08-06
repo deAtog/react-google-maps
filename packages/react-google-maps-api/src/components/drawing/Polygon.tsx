@@ -333,25 +333,6 @@ function PolygonFunctional({
       map,
     })
 
-    if (path) {
-      polygon.setPath(path)
-    }
-
-    if (paths) {
-      polygon.setPaths(paths)
-    }
-
-    if (typeof visible !== 'undefined') {
-      polygon.setVisible(visible)
-    }
-
-    if (typeof editable !== 'undefined') {
-      polygon.setEditable(editable)
-    }
-
-    if (typeof draggable !== 'undefined') {
-      polygon.setDraggable(draggable)
-    }
 
     setInstance(polygon)
 
