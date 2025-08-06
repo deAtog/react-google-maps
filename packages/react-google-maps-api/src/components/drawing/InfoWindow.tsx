@@ -94,17 +94,6 @@ function InfoWindowFunctional({
 
   const [instance, setInstance] = useState<google.maps.InfoWindow | null>(null)
 
-  const [closeclickListener, setCloseClickListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [domreadyclickListener, setDomReadyClickListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [contentchangedclickListener, setContentChangedClickListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [positionchangedclickListener, setPositionChangedClickListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [zindexchangedclickListener, setZindexChangedClickListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-
   const containerElementRef = useRef<HTMLDivElement | null>(null)
 
   // Order does matter
@@ -141,74 +130,52 @@ function InfoWindowFunctional({
   useEffect(() => {
     if (!instance || !onCloseClick) return;
 
-    if (closeclickListener !== null) {
-      google.maps.event.removeListener(closeclickListener)
-    }
+    const handler = google.maps.event.addListener(instance, 'closeclick', onCloseClick);
 
-    setCloseClickListener(
-      google.maps.event.addListener(instance, 'closeclick', onCloseClick)
-    )
-  }, [onCloseClick])
+    return () => {
+      handler.remove();
+    }
+  }, [instance, onCloseClick])
 
   useEffect(() => {
     if (!instance || !onDomReady) return;
 
-    if (domreadyclickListener !== null) {
-      google.maps.event.removeListener(domreadyclickListener)
-    }
+    const handler = google.maps.event.addListener(instance, 'domready', onDomReady);
 
-    setDomReadyClickListener(
-      google.maps.event.addListener(instance, 'domready', onDomReady)
-    )
-  }, [onDomReady])
+    return () => {
+      handler.remove();
+    }
+  }, [instance, onDomReady])
 
   useEffect(() => {
     if (!instance || !onContentChanged) return;
 
-    if (contentchangedclickListener !== null) {
-      google.maps.event.removeListener(contentchangedclickListener)
-    }
+    const handler = google.maps.event.addListener(instance, 'content_changed', onContentChanged);
 
-    setContentChangedClickListener(
-      google.maps.event.addListener(
-        instance,
-        'content_changed',
-        onContentChanged
-      )
-    )
-  }, [onContentChanged])
+    return () => {
+      handler.remove();
+    }
+  }, [instance, onContentChanged])
 
   useEffect(() => {
     if (!instance || !onPositionChanged) return;
 
-    if (positionchangedclickListener !== null) {
-      google.maps.event.removeListener(positionchangedclickListener)
-    }
+    const handler = google.maps.event.addListener(instance, 'position_changed', onPositionChanged);
 
-    setPositionChangedClickListener(
-      google.maps.event.addListener(
-        instance,
-        'position_changed',
-        onPositionChanged
-      )
-    )
-  }, [onPositionChanged])
+    return () => {
+      handler.remove();
+    }
+  }, [instance, onPositionChanged])
 
   useEffect(() => {
     if (!instance || !onZindexChanged) return;
 
-    if (zindexchangedclickListener !== null) {
-      google.maps.event.removeListener(zindexchangedclickListener)
-    }
+    const handler = google.maps.event.addListener(instance, 'zindex_changed', onZindexChanged);
 
-    setZindexChangedClickListener(
-      google.maps.event.addListener(
-        instance,
-        'zindex_changed',
-        onZindexChanged
-      )
-    )
-  }, [onZindexChanged])
+    return () => {
+      handler.remove();
+    }
+  }, [instance, onZindexChanged])
 
   useEffect(() => {
     const infoWindow = new google.maps.InfoWindow(options)
@@ -216,48 +183,6 @@ function InfoWindowFunctional({
     setInstance(infoWindow)
 
     containerElementRef.current = document.createElement('div')
-
-    if (onCloseClick) {
-      setCloseClickListener(
-        google.maps.event.addListener(infoWindow, 'closeclick', onCloseClick)
-      )
-    }
-
-    if (onDomReady) {
-      setDomReadyClickListener(
-        google.maps.event.addListener(infoWindow, 'domready', onDomReady)
-      )
-    }
-
-    if (onContentChanged) {
-      setContentChangedClickListener(
-        google.maps.event.addListener(
-          infoWindow,
-          'content_changed',
-          onContentChanged
-        )
-      )
-    }
-
-    if (onPositionChanged) {
-      setPositionChangedClickListener(
-        google.maps.event.addListener(
-          infoWindow,
-          'position_changed',
-          onPositionChanged
-        )
-      )
-    }
-
-    if (onZindexChanged) {
-      setZindexChangedClickListener(
-        google.maps.event.addListener(
-          infoWindow,
-          'zindex_changed',
-          onZindexChanged
-        )
-      )
-    }
 
     infoWindow.setContent(containerElementRef.current)
 
@@ -285,26 +210,6 @@ function InfoWindowFunctional({
     }
 
     return () => {
-      if (closeclickListener) {
-        google.maps.event.removeListener(closeclickListener)
-      }
-
-      if (contentchangedclickListener) {
-        google.maps.event.removeListener(contentchangedclickListener)
-      }
-
-      if (domreadyclickListener) {
-        google.maps.event.removeListener(domreadyclickListener)
-      }
-
-      if (positionchangedclickListener) {
-        google.maps.event.removeListener(positionchangedclickListener)
-      }
-
-      if (zindexchangedclickListener) {
-        google.maps.event.removeListener(zindexchangedclickListener)
-      }
-
       if (onUnmount) {
         onUnmount(infoWindow)
       }
