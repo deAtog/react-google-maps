@@ -202,267 +202,267 @@ function DataFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (instance !== null) {
-      instance.setMap(map)
-    }
+    if (!instance) return;
+
+    instance.setMap(map);
   }, [map])
 
   useEffect(() => {
-    if (instance && onDblClick) {
-      if (dblclickListener !== null) {
-        google.maps.event.removeListener(dblclickListener)
-      }
+    if (!instance || !onDblClick) return;
 
-      setDblclickListener(
-        google.maps.event.addListener(instance, 'dblclick', onDblClick)
-      )
+    if (dblclickListener !== null) {
+      google.maps.event.removeListener(dblclickListener)
     }
+
+    setDblclickListener(
+      google.maps.event.addListener(instance, 'dblclick', onDblClick)
+    )
   }, [onDblClick])
 
   useEffect(() => {
-    if (instance && onMouseDown) {
-      if (mousedownListener !== null) {
-        google.maps.event.removeListener(mousedownListener)
-      }
+    if (!instance || !onMouseDown) return;
 
-      setMousedownListener(
-        google.maps.event.addListener(instance, 'mousedown', onMouseDown)
-      )
+    if (mousedownListener !== null) {
+      google.maps.event.removeListener(mousedownListener)
     }
+
+    setMousedownListener(
+      google.maps.event.addListener(instance, 'mousedown', onMouseDown)
+    )
   }, [onMouseDown])
 
   useEffect(() => {
-    if (instance && onMouseMove) {
-      if (mousemoveListener !== null) {
-        google.maps.event.removeListener(mousemoveListener)
-      }
+    if (!instance || !onMouseMove) return;
 
-      setMousemoveListener(
-        google.maps.event.addListener(instance, 'mousemove', onMouseMove)
-      )
+    if (mousemoveListener !== null) {
+      google.maps.event.removeListener(mousemoveListener)
     }
+
+    setMousemoveListener(
+      google.maps.event.addListener(instance, 'mousemove', onMouseMove)
+    )
   }, [onMouseMove])
 
   useEffect(() => {
-    if (instance && onMouseOut) {
-      if (mouseoutListener !== null) {
-        google.maps.event.removeListener(mouseoutListener)
-      }
+    if (!instance || !onMouseOut) return;
 
-      setMouseoutListener(
-        google.maps.event.addListener(instance, 'mouseout', onMouseOut)
-      )
+    if (mouseoutListener !== null) {
+      google.maps.event.removeListener(mouseoutListener)
     }
+
+    setMouseoutListener(
+      google.maps.event.addListener(instance, 'mouseout', onMouseOut)
+    )
   }, [onMouseOut])
 
   useEffect(() => {
-    if (instance && onMouseOver) {
-      if (mouseoverListener !== null) {
-        google.maps.event.removeListener(mouseoverListener)
-      }
+    if (!instance || !onMouseOver) return;
 
-      setMouseoverListener(
-        google.maps.event.addListener(instance, 'mouseover', onMouseOver)
-      )
+    if (mouseoverListener !== null) {
+      google.maps.event.removeListener(mouseoverListener)
     }
+
+    setMouseoverListener(
+      google.maps.event.addListener(instance, 'mouseover', onMouseOver)
+    )
   }, [onMouseOver])
 
   useEffect(() => {
-    if (instance && onMouseUp) {
-      if (mouseupListener !== null) {
-        google.maps.event.removeListener(mouseupListener)
-      }
+    if (!instance || !onMouseUp) return;
 
-      setMouseupListener(
-        google.maps.event.addListener(instance, 'mouseup', onMouseUp)
-      )
+    if (mouseupListener !== null) {
+      google.maps.event.removeListener(mouseupListener)
     }
+
+    setMouseupListener(
+      google.maps.event.addListener(instance, 'mouseup', onMouseUp)
+    )
   }, [onMouseUp])
 
   useEffect(() => {
-    if (instance && onRightClick) {
-      if (rightclickListener !== null) {
-        google.maps.event.removeListener(rightclickListener)
-      }
+    if (!instance || !onRightClick) return;
 
-      setRightclickListener(
-        google.maps.event.addListener(instance, 'rightclick', onRightClick)
-      )
+    if (rightclickListener !== null) {
+      google.maps.event.removeListener(rightclickListener)
     }
+
+    setRightclickListener(
+      google.maps.event.addListener(instance, 'rightclick', onRightClick)
+    )
   }, [onRightClick])
 
   useEffect(() => {
-    if (instance && onClick) {
-      if (clickListener !== null) {
-        google.maps.event.removeListener(clickListener)
-      }
+    if (!instance || !onClick) return;
 
-      setClickListener(
-        google.maps.event.addListener(instance, 'click', onClick)
-      )
+    if (clickListener !== null) {
+      google.maps.event.removeListener(clickListener)
     }
+
+    setClickListener(
+      google.maps.event.addListener(instance, 'click', onClick)
+    )
   }, [onClick])
 
   useEffect(() => {
-    if (instance && onAddFeature) {
-      if (addFeatureListener !== null) {
-        google.maps.event.removeListener(addFeatureListener)
-      }
+    if (!instance || !onAddFeature) return;
 
-      setAddFeatureListener(
-        google.maps.event.addListener(instance, 'addfeature', onAddFeature)
-      )
+    if (addFeatureListener !== null) {
+      google.maps.event.removeListener(addFeatureListener)
     }
+
+    setAddFeatureListener(
+      google.maps.event.addListener(instance, 'addfeature', onAddFeature)
+    )
   }, [onAddFeature])
 
   useEffect(() => {
-    if (instance && onRemoveFeature) {
-      if (removeFeatureListener !== null) {
-        google.maps.event.removeListener(removeFeatureListener)
-      }
+    if (!instance || !onRemoveFeature) return;
 
-      setRemoveFeatureListener(
-        google.maps.event.addListener(
-          instance,
-          'removefeature',
-          onRemoveFeature
-        )
-      )
+    if (removeFeatureListener !== null) {
+      google.maps.event.removeListener(removeFeatureListener)
     }
+
+    setRemoveFeatureListener(
+      google.maps.event.addListener(
+        instance,
+        'removefeature',
+        onRemoveFeature
+      )
+    )
   }, [onRemoveFeature])
 
   useEffect(() => {
-    if (instance && onRemoveProperty) {
-      if (removePropertyListener !== null) {
-        google.maps.event.removeListener(removePropertyListener)
-      }
+    if (!instance || !onRemoveProperty) return;
 
+    if (removePropertyListener !== null) {
+      google.maps.event.removeListener(removePropertyListener)
+    }
+
+    setRemovePropertyListener(
+      google.maps.event.addListener(
+        instance,
+        'removeproperty',
+        onRemoveProperty
+      )
+    )
+  }, [onRemoveProperty])
+
+  useEffect(() => {
+    if (!instance || !onSetGeometry) return;
+
+    if (setGeometryListener !== null) {
+      google.maps.event.removeListener(setGeometryListener)
+    }
+
+    setSetGeometryListener(
+      google.maps.event.addListener(instance, 'setgeometry', onSetGeometry)
+    )
+  }, [onSetGeometry])
+
+  useEffect(() => {
+    if (!instance || !onSetProperty) return;
+
+    if (setPropertyListener !== null) {
+      google.maps.event.removeListener(setPropertyListener)
+    }
+
+    setSetPropertyListener(
+      google.maps.event.addListener(instance, 'setproperty', onSetProperty)
+    )
+  }, [onSetProperty])
+
+  useEffect(() => {
+    if (!map) return;
+
+    const data = new google.maps.Data({
+      ...options,
+      map,
+    })
+
+    if (onDblClick) {
+      setDblclickListener(
+        google.maps.event.addListener(data, 'dblclick', onDblClick)
+      )
+    }
+
+    if (onMouseDown) {
+      setMousedownListener(
+        google.maps.event.addListener(data, 'mousedown', onMouseDown)
+      )
+    }
+
+    if (onMouseMove) {
+      setMousemoveListener(
+        google.maps.event.addListener(data, 'mousemove', onMouseMove)
+      )
+    }
+
+    if (onMouseOut) {
+      setMouseoutListener(
+        google.maps.event.addListener(data, 'mouseout', onMouseOut)
+      )
+    }
+
+    if (onMouseOver) {
+      setMouseoverListener(
+        google.maps.event.addListener(data, 'mouseover', onMouseOver)
+      )
+    }
+
+    if (onMouseUp) {
+      setMouseupListener(
+        google.maps.event.addListener(data, 'mouseup', onMouseUp)
+      )
+    }
+
+    if (onRightClick) {
+      setRightclickListener(
+        google.maps.event.addListener(data, 'rightclick', onRightClick)
+      )
+    }
+
+    if (onClick) {
+      setClickListener(google.maps.event.addListener(data, 'click', onClick))
+    }
+
+    if (onAddFeature) {
+      setAddFeatureListener(
+        google.maps.event.addListener(data, 'addfeature', onAddFeature)
+      )
+    }
+
+    if (onRemoveFeature) {
+      setRemoveFeatureListener(
+        google.maps.event.addListener(data, 'removefeature', onRemoveFeature)
+      )
+    }
+
+    if (onRemoveProperty) {
       setRemovePropertyListener(
         google.maps.event.addListener(
-          instance,
+          data,
           'removeproperty',
           onRemoveProperty
         )
       )
     }
-  }, [onRemoveProperty])
 
-  useEffect(() => {
-    if (instance && onSetGeometry) {
-      if (setGeometryListener !== null) {
-        google.maps.event.removeListener(setGeometryListener)
-      }
-
+    if (onSetGeometry) {
       setSetGeometryListener(
-        google.maps.event.addListener(instance, 'setgeometry', onSetGeometry)
+        google.maps.event.addListener(data, 'setgeometry', onSetGeometry)
       )
     }
-  }, [onSetGeometry])
 
-  useEffect(() => {
-    if (instance && onSetProperty) {
-      if (setPropertyListener !== null) {
-        google.maps.event.removeListener(setPropertyListener)
-      }
-
+    if (onSetProperty) {
       setSetPropertyListener(
-        google.maps.event.addListener(instance, 'setproperty', onSetProperty)
+        google.maps.event.addListener(data, 'setproperty', onSetProperty)
       )
     }
-  }, [onSetProperty])
 
-  useEffect(() => {
-    if (map !== null) {
-      const data = new google.maps.Data({
-        ...options,
-        map,
-      })
+    setInstance(data)
 
-      if (onDblClick) {
-        setDblclickListener(
-          google.maps.event.addListener(data, 'dblclick', onDblClick)
-        )
-      }
-
-      if (onMouseDown) {
-        setMousedownListener(
-          google.maps.event.addListener(data, 'mousedown', onMouseDown)
-        )
-      }
-
-      if (onMouseMove) {
-        setMousemoveListener(
-          google.maps.event.addListener(data, 'mousemove', onMouseMove)
-        )
-      }
-
-      if (onMouseOut) {
-        setMouseoutListener(
-          google.maps.event.addListener(data, 'mouseout', onMouseOut)
-        )
-      }
-
-      if (onMouseOver) {
-        setMouseoverListener(
-          google.maps.event.addListener(data, 'mouseover', onMouseOver)
-        )
-      }
-
-      if (onMouseUp) {
-        setMouseupListener(
-          google.maps.event.addListener(data, 'mouseup', onMouseUp)
-        )
-      }
-
-      if (onRightClick) {
-        setRightclickListener(
-          google.maps.event.addListener(data, 'rightclick', onRightClick)
-        )
-      }
-
-      if (onClick) {
-        setClickListener(google.maps.event.addListener(data, 'click', onClick))
-      }
-
-      if (onAddFeature) {
-        setAddFeatureListener(
-          google.maps.event.addListener(data, 'addfeature', onAddFeature)
-        )
-      }
-
-      if (onRemoveFeature) {
-        setRemoveFeatureListener(
-          google.maps.event.addListener(data, 'removefeature', onRemoveFeature)
-        )
-      }
-
-      if (onRemoveProperty) {
-        setRemovePropertyListener(
-          google.maps.event.addListener(
-            data,
-            'removeproperty',
-            onRemoveProperty
-          )
-        )
-      }
-
-      if (onSetGeometry) {
-        setSetGeometryListener(
-          google.maps.event.addListener(data, 'setgeometry', onSetGeometry)
-        )
-      }
-
-      if (onSetProperty) {
-        setSetPropertyListener(
-          google.maps.event.addListener(data, 'setproperty', onSetProperty)
-        )
-      }
-
-      setInstance(data)
-
-      if (onLoad) {
-        onLoad(data)
-      }
+    if (onLoad) {
+      onLoad(data)
     }
 
     return () => {
