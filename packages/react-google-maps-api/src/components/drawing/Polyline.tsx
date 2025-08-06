@@ -283,22 +283,6 @@ function PolylineFunctional({
       map,
     })
 
-    if (path) {
-      polyline.setPath(path)
-    }
-
-    if (typeof visible !== 'undefined') {
-      polyline.setVisible(visible)
-    }
-
-    if (typeof editable !== 'undefined') {
-      polyline.setEditable(editable)
-    }
-
-    if (typeof draggable !== 'undefined') {
-      polyline.setDraggable(draggable)
-    }
-
     setInstance(polyline)
 
     if (onLoad) {
