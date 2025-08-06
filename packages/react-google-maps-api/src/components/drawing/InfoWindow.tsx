@@ -109,105 +109,105 @@ function InfoWindowFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (instance !== null) {
-      instance.close()
+    if (!instance) return;
 
-      if (anchor) {
-        instance.open(map, anchor)
-      } else if (instance.getPosition()) {
-        instance.open(map)
-      }
+    instance.close()
+
+    if (anchor) {
+      instance.open(map, anchor)
+    } else if (instance.getPosition()) {
+      instance.open(map)
     }
   }, [map, instance, anchor])
 
   useEffect(() => {
-    if (options && instance !== null) {
-      instance.setOptions(options)
-    }
+    if (!instance || !options) return;
+
+    instance.setOptions(options)
   }, [instance, options])
 
   useEffect(() => {
-    if (position && instance !== null) {
-      instance.setPosition(position)
-    }
+    if (!instance || !position) return;
+
+    instance.setPosition(position)
   }, [position])
 
   useEffect(() => {
-    if (typeof zIndex === 'number' && instance !== null) {
-      instance.setZIndex(zIndex)
-    }
+    if (!instance || typeof zIndex !== 'number') return;
+
+    instance.setZIndex(zIndex)
   }, [zIndex])
 
   useEffect(() => {
-    if (instance && onCloseClick) {
-      if (closeclickListener !== null) {
-        google.maps.event.removeListener(closeclickListener)
-      }
+    if (!instance || !onCloseClick) return;
 
-      setCloseClickListener(
-        google.maps.event.addListener(instance, 'closeclick', onCloseClick)
-      )
+    if (closeclickListener !== null) {
+      google.maps.event.removeListener(closeclickListener)
     }
+
+    setCloseClickListener(
+      google.maps.event.addListener(instance, 'closeclick', onCloseClick)
+    )
   }, [onCloseClick])
 
   useEffect(() => {
-    if (instance && onDomReady) {
-      if (domreadyclickListener !== null) {
-        google.maps.event.removeListener(domreadyclickListener)
-      }
+    if (!instance || !onDomReady) return;
 
-      setDomReadyClickListener(
-        google.maps.event.addListener(instance, 'domready', onDomReady)
-      )
+    if (domreadyclickListener !== null) {
+      google.maps.event.removeListener(domreadyclickListener)
     }
+
+    setDomReadyClickListener(
+      google.maps.event.addListener(instance, 'domready', onDomReady)
+    )
   }, [onDomReady])
 
   useEffect(() => {
-    if (instance && onContentChanged) {
-      if (contentchangedclickListener !== null) {
-        google.maps.event.removeListener(contentchangedclickListener)
-      }
+    if (!instance || !onContentChanged) return;
 
-      setContentChangedClickListener(
-        google.maps.event.addListener(
-          instance,
-          'content_changed',
-          onContentChanged
-        )
-      )
+    if (contentchangedclickListener !== null) {
+      google.maps.event.removeListener(contentchangedclickListener)
     }
+
+    setContentChangedClickListener(
+      google.maps.event.addListener(
+        instance,
+        'content_changed',
+        onContentChanged
+      )
+    )
   }, [onContentChanged])
 
   useEffect(() => {
-    if (instance && onPositionChanged) {
-      if (positionchangedclickListener !== null) {
-        google.maps.event.removeListener(positionchangedclickListener)
-      }
+    if (!instance || !onPositionChanged) return;
 
-      setPositionChangedClickListener(
-        google.maps.event.addListener(
-          instance,
-          'position_changed',
-          onPositionChanged
-        )
-      )
+    if (positionchangedclickListener !== null) {
+      google.maps.event.removeListener(positionchangedclickListener)
     }
+
+    setPositionChangedClickListener(
+      google.maps.event.addListener(
+        instance,
+        'position_changed',
+        onPositionChanged
+      )
+    )
   }, [onPositionChanged])
 
   useEffect(() => {
-    if (instance && onZindexChanged) {
-      if (zindexchangedclickListener !== null) {
-        google.maps.event.removeListener(zindexchangedclickListener)
-      }
+    if (!instance || !onZindexChanged) return;
 
-      setZindexChangedClickListener(
-        google.maps.event.addListener(
-          instance,
-          'zindex_changed',
-          onZindexChanged
-        )
-      )
+    if (zindexchangedclickListener !== null) {
+      google.maps.event.removeListener(zindexchangedclickListener)
     }
+
+    setZindexChangedClickListener(
+      google.maps.event.addListener(
+        instance,
+        'zindex_changed',
+        onZindexChanged
+      )
+    )
   }, [onZindexChanged])
 
   useEffect(() => {
