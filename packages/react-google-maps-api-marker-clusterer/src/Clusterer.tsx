@@ -46,7 +46,7 @@ const IMAGE_SIZES = [53, 56, 66, 78, 90]
 const CLUSTERER_CLASS = 'cluster'
 
 export class Clusterer implements google.maps.OverlayView {
-  markers: MarkerExtended[]
+  markers: Set<MarkerExtended>
   clusters: Cluster[]
   listeners: google.maps.MapsEventListener[]
   activeMap: google.maps.Map | google.maps.StreetViewPanorama | null
@@ -131,7 +131,7 @@ export class Clusterer implements google.maps.OverlayView {
     this.extend = this.extend.bind(this)
     this.extend(Clusterer, google.maps.OverlayView)
 
-    this.markers = []
+    this.markers = new Set<MarkerExtended>();
     this.clusters = []
     this.listeners = []
     this.activeMap = null
@@ -242,10 +242,17 @@ export class Clusterer implements google.maps.OverlayView {
 
   onRemove(): void {
     // Put all the managed markers back on the map:
-    for (const marker of this.markers) {
+    const iterator = this.markers.values();
+    let entry = iterator.next();
+
+    while (!entry.done) {
+      const marker = entry.value;
+
       if (marker.getMap() !== this.activeMap) {
-        marker.setMap(this.activeMap)
+        marker.setMap(this.activeMap);
       }
+
+      entry = iterator.next();
     }
 
     // Remove all clusters:
@@ -321,13 +328,18 @@ export class Clusterer implements google.maps.OverlayView {
     const markers = this.getMarkers()
 
     const bounds = new google.maps.LatLngBounds()
+    const iterator = markers.values();
+    let entry =  iterator.next();
 
-    for (const marker of markers) {
-      const position = marker.getPosition()
+    while (!entry.done) {
+      const marker = entry.value;
+      const position = marker.getPosition();
 
       if (position) {
         bounds.extend(position)
       }
+
+      entry = iterator.next();
     }
 
     const map = (this as unknown as google.maps.OverlayView).getMap()
@@ -458,12 +470,12 @@ export class Clusterer implements google.maps.OverlayView {
     this.clusterClass = clusterClass
   }
 
-  getMarkers(): MarkerExtended[] {
-    return this.markers
+  getMarkers(): Set<MarkerExtended> {
+    return this.markers;
   }
 
   getTotalMarkers(): number {
-    return this.markers.length
+    return this.markers.size;
   }
 
   getClusters(): Cluster[] {
@@ -512,32 +524,16 @@ export class Clusterer implements google.maps.OverlayView {
 
     marker.isAdded = false
 
-    this.markers.push(marker)
+    this.markers.add(marker);
   }
 
   removeMarker_(marker: MarkerExtended): boolean {
-    let index = -1
-
-    if (this.markers.indexOf) {
-      index = this.markers.indexOf(marker)
-    } else {
-      for (let i = 0; i < this.markers.length; i++) {
-        if (marker === this.markers[i]) {
-          index = i
-
-          break
-        }
-      }
-    }
-
-    if (index === -1) {
+    if (!this.markers.delete(marker)) {
       // Marker is not in our list of markers, so do nothing:
       return false
     }
 
     marker.setMap(null)
-
-    this.markers.splice(index, 1) // Remove the marker from the list of managed markers
 
     return true
   }
@@ -569,7 +565,7 @@ export class Clusterer implements google.maps.OverlayView {
   clearMarkers() {
     this.resetViewport(true)
 
-    this.markers = []
+    this.markers.clear();
   }
 
   repaint() {
@@ -642,7 +638,7 @@ export class Clusterer implements google.maps.OverlayView {
 
   redraw() {
     // Redraws all the clusters.
-    this.createClusters(0)
+    this.createClusters();
   }
 
   resetViewport(optHide: boolean) {
@@ -654,12 +650,19 @@ export class Clusterer implements google.maps.OverlayView {
     this.clusters = []
 
     // Reset the markers to not be added and to be removed from the map.
-    for (const marker of this.markers) {
+    const iterator = this.markers.values();
+    let entry = iterator.next();
+
+    while(!entry.done) {
+      const marker = entry.value;
+
       marker.isAdded = false
 
       if (optHide) {
         marker.setMap(null)
       }
+
+      entry = iterator.next();
     }
   }
 
@@ -725,13 +728,13 @@ export class Clusterer implements google.maps.OverlayView {
     }
   }
 
-  createClusters(iFirst: number) {
+  createClusters(iterator : Iterator<MarkerExtended> | null = null) {
     if (!this.ready) {
       return
     }
 
     // Cancel previous batch processing if we're working on the first batch:
-    if (iFirst === 0) {
+    if (!iterator) {
       /**
        * This event is fired when the <code>Clusterer</code> begins
        *  clustering markers.
@@ -748,6 +751,8 @@ export class Clusterer implements google.maps.OverlayView {
         // @ts-ignore
         delete this.timerRefStatic
       }
+
+      iterator = this.markers.values();
     }
 
     const map = (this as unknown as google.maps.OverlayView).getMap()
@@ -771,20 +776,23 @@ export class Clusterer implements google.maps.OverlayView {
 
     const extendedMapBounds = this.getExtendedBounds(mapBounds)
 
-    const iLast = Math.min(iFirst + this.batchSize, this.markers.length)
+    let entry = iterator.next();
+    let i = 0;
 
-    for (let i = iFirst; i < iLast; i++) {
-      const marker = this.markers[i]
+    while (!entry.done && i < this.batchSize) {
+      const marker = entry.value;
 
       if (marker && !marker.isAdded && this.isMarkerInBounds(marker, extendedMapBounds) && (!this.ignoreHidden || (this.ignoreHidden && marker.getVisible()))) {
         this.addToClosestCluster(marker)
       }
+
+      entry = iterator.next();
     }
 
-    if (iLast < this.markers.length) {
+    if (!entry.done) {
       this.timerRefStatic = window.setTimeout(
         () => {
-          this.createClusters(iLast)
+          this.createClusters(iterator)
         },
         0
       )
