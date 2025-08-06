@@ -191,33 +191,6 @@ function GoogleMapFunctional({
   const [map, setMap] = useState<google.maps.Map | null>(null)
   const ref = useRef<HTMLDivElement | null>(null)
 
-  // const [extraMapTypesListener, setExtraMapTypesListener] = useState<google.maps.MapsEventListener | null>(null)
-  const [centerChangedListener, setCenterChangedListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-
-  const [dblclickListener, setDblclickListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [dragendListener, setDragendListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [dragstartListener, setDragstartListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [mousedownListener, setMousedownListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [mousemoveListener, setMousemoveListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [mouseoutListener, setMouseoutListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [mouseoverListener, setMouseoverListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [mouseupListener, setMouseupListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [rightclickListener, setRightclickListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [clickListener, setClickListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [dragListener, setDragListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-
   // Order does matter
   useEffect(() => {
     if (options && map !== null) {
@@ -232,142 +205,122 @@ function GoogleMapFunctional({
   }, [map, center])
 
   useEffect(() => {
-    if (map && onDblClick) {
-      if (dblclickListener !== null) {
-        google.maps.event.removeListener(dblclickListener)
-      }
+    if (!map || !onDblClick) return;
 
-      setDblclickListener(
-        google.maps.event.addListener(map, 'dblclick', onDblClick)
-      )
+    const handler = google.maps.event.addListener(map, 'dblclick', onDblClick);
+
+    return () => {
+      handler.remove();
     }
-  }, [onDblClick])
+  }, [map, onDblClick])
 
   useEffect(() => {
-    if (map && onDragEnd) {
-      if (dragendListener !== null) {
-        google.maps.event.removeListener(dragendListener)
-      }
+    if (!map || !onDragEnd) return;
 
-      setDragendListener(
-        google.maps.event.addListener(map, 'dragend', onDragEnd)
-      )
+    const handler = google.maps.event.addListener(map, 'dragend', onDragEnd);
+
+    return () => {
+      handler.remove();
     }
-  }, [onDragEnd])
+  }, [map, onDragEnd])
 
   useEffect(() => {
-    if (map && onDragStart) {
-      if (dragstartListener !== null) {
-        google.maps.event.removeListener(dragstartListener)
-      }
+    if (!map || !onDragStart) return;
 
-      setDragstartListener(
-        google.maps.event.addListener(map, 'dragstart', onDragStart)
-      )
+    const handler = google.maps.event.addListener(map, 'dragstart', onDragStart);
+
+    return () => {
+      handler.remove();
     }
-  }, [onDragStart])
+  }, [map, onDragStart])
 
   useEffect(() => {
-    if (map && onMouseDown) {
-      if (mousedownListener !== null) {
-        google.maps.event.removeListener(mousedownListener)
-      }
+    if (!map || !onMouseDown) return;
 
-      setMousedownListener(
-        google.maps.event.addListener(map, 'mousedown', onMouseDown)
-      )
+    const handler = google.maps.event.addListener(map, 'mousedown', onMouseDown);
+
+    return () => {
+      handler.remove();
     }
-  }, [onMouseDown])
+  }, [map, onMouseDown])
 
   useEffect(() => {
-    if (map && onMouseMove) {
-      if (mousemoveListener !== null) {
-        google.maps.event.removeListener(mousemoveListener)
-      }
+    if (!map || !onMouseMove) return;
 
-      setMousemoveListener(
-        google.maps.event.addListener(map, 'mousemove', onMouseMove)
-      )
+    const handler = google.maps.event.addListener(map, 'mousemove', onMouseMove);
+
+    return () => {
+      handler.remove();
     }
-  }, [onMouseMove])
+  }, [map, onMouseMove])
 
   useEffect(() => {
-    if (map && onMouseOut) {
-      if (mouseoutListener !== null) {
-        google.maps.event.removeListener(mouseoutListener)
-      }
+    if (!map || !onMouseOut) return;
 
-      setMouseoutListener(
-        google.maps.event.addListener(map, 'mouseout', onMouseOut)
-      )
+    const handler = google.maps.event.addListener(map, 'mouseout', onMouseOut);
+
+    return () => {
+      handler.remove();
     }
-  }, [onMouseOut])
+  }, [map, onMouseOut])
 
   useEffect(() => {
-    if (map && onMouseOver) {
-      if (mouseoverListener !== null) {
-        google.maps.event.removeListener(mouseoverListener)
-      }
+    if (!map || !onMouseOver) return;
 
-      setMouseoverListener(
-        google.maps.event.addListener(map, 'mouseover', onMouseOver)
-      )
+    const handler = google.maps.event.addListener(map, 'mouseover', onMouseOver);
+
+    return () => {
+      handler.remove();
     }
-  }, [onMouseOver])
+  }, [map, onMouseOver])
 
   useEffect(() => {
-    if (map && onMouseUp) {
-      if (mouseupListener !== null) {
-        google.maps.event.removeListener(mouseupListener)
-      }
+    if (!map || !onMouseUp) return;
 
-      setMouseupListener(
-        google.maps.event.addListener(map, 'mouseup', onMouseUp)
-      )
+    const handler = google.maps.event.addListener(map, 'mouseup', onMouseUp);
+
+    return () => {
+      handler.remove();
     }
-  }, [onMouseUp])
+  }, [map, onMouseUp])
 
   useEffect(() => {
-    if (map && onRightClick) {
-      if (rightclickListener !== null) {
-        google.maps.event.removeListener(rightclickListener)
-      }
+    if (!map || !onRightClick) return;
 
-      setRightclickListener(
-        google.maps.event.addListener(map, 'rightclick', onRightClick)
-      )
+    const handler = google.maps.event.addListener(map, 'rightclick', onRightClick);
+
+    return () => {
+      handler.remove();
     }
-  }, [onRightClick])
+  }, [map, onRightClick])
 
   useEffect(() => {
-    if (map && onClick) {
-      if (clickListener !== null) {
-        google.maps.event.removeListener(clickListener)
-      }
+    if (!map || !onClick) return;
 
-      setClickListener(google.maps.event.addListener(map, 'click', onClick))
+    const handler = google.maps.event.addListener(map, 'click', onClick);
+
+    return () => {
+      handler.remove();
     }
-  }, [onClick])
+  }, [map, onClick])
 
   useEffect(() => {
-    if (map && onDrag) {
-      if (dragListener !== null) {
-        google.maps.event.removeListener(dragListener)
-      }
+    if (!map || !onDrag) return;
 
-      setDragListener(google.maps.event.addListener(map, 'drag', onDrag))
+    const handler = google.maps.event.addListener(map, 'drag', onDrag);
+
+    return () => {
+      handler.remove();
     }
-  }, [onDrag])
+  }, [map, onDrag])
 
   useEffect(() => {
-    if (map && onCenterChanged) {
-      if (centerChangedListener !== null) {
-        google.maps.event.removeListener(centerChangedListener)
-      }
+    if (!map || !onCenterChanged) return;
 
-      setCenterChangedListener(
-        google.maps.event.addListener(map, 'center_changed', onCenterChanged)
-      )
+    const handler = google.maps.event.addListener(map, 'center_changed', onCenterChanged)
+
+    return () => {
+      handler.remove();
     }
   }, [onClick])
 
