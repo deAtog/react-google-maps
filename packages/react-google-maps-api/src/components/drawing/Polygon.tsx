@@ -157,7 +157,11 @@ function PolygonFunctional({
     if (!instance) return;
 
     instance.setMap(map)
-  }, [map])
+
+    return () => {
+      instance.setMap(null);
+    }
+  }, [instance, map])
 
   useEffect(() => {
     if (!instance || options === undefined) return;
@@ -328,25 +332,26 @@ function PolygonFunctional({
   }, [instance, onDrag])
 
   useEffect(() => {
+    if (!instance || !onLoad) return;
+
+    onLoad(instance);
+  }, [instance, onLoad]);
+
+  useEffect(() => {
+    if (!instance || !onUnmount) return;
+
+    return () => {
+      onUnmount(instance);
+    }
+  }, [instance, onUnmount])
+
+  useEffect(() => {
     const polygon = new google.maps.Polygon({
       ...options,
       map,
     })
 
-
     setInstance(polygon)
-
-    if (onLoad) {
-      onLoad(polygon)
-    }
-
-    return () => {
-      if (onUnmount) {
-        onUnmount(polygon)
-      }
-
-      polygon.setMap(null)
-    }
   }, [])
 
   return null
