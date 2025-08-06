@@ -1,10 +1,10 @@
 import {
   memo,
-  useState,
   useEffect,
   useContext,
   PureComponent,
   type ContextType,
+  useMemo,
 } from 'react'
 
 import {
@@ -170,7 +170,14 @@ function DataFunctional({
 }: DataProps): null {
   const map = useContext<google.maps.Map | null>(MapContext)
 
-  const [instance, setInstance] = useState<google.maps.Data | null>(null)
+  const instance = useMemo(() => {
+    if (!map) return;
+
+    return new google.maps.Data({
+      ...options,
+      map,
+    })
+  }, [map]);
 
   // Order does matter
   useEffect(() => {
@@ -328,17 +335,6 @@ function DataFunctional({
       onUnmount(instance);
     }
   })
-
-  useEffect(() => {
-    if (!map) return;
-
-    const data = new google.maps.Data({
-      ...options,
-      map,
-    })
-
-    setInstance(data)
-  }, [map])
 
   return null
 }
