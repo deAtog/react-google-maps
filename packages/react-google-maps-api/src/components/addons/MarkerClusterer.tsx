@@ -181,88 +181,55 @@ function MarkerClustererFunctional(
   const [instance, setInstance] = useState<Clusterer | null>(null)
   const map = useContext<google.maps.Map | null>(MapContext)
 
-  const [clickListener, setClickListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [clusteringBeginListener, setClusteringBeginListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [clusteringEndListener, setClusteringEndListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [mouseoutListener, setMouseoutListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-  const [mouseoverListener, setMouseoverListener] =
-    useState<google.maps.MapsEventListener | null>(null)
-
   useEffect(() => {
     if (!instance || !onMouseOut) return;
 
-    if (mouseoutListener !== null) {
-      google.maps.event.removeListener(mouseoutListener)
-    }
+    const handler = google.maps.event.addListener(instance, eventMap.onMouseOut, onMouseOut);
 
-    setMouseoutListener(
-      google.maps.event.addListener(instance, eventMap.onMouseOut, onMouseOut)
-    )
-  }, [onMouseOut])
+    return () => {
+      return handler.remove();
+    }
+  }, [instance, onMouseOut])
 
   useEffect(() => {
     if (!instance || !onMouseOver) return;
 
-    if (mouseoverListener !== null) {
-      google.maps.event.removeListener(mouseoverListener)
-    }
+    const handler = google.maps.event.addListener(instance, eventMap.onMouseOver, onMouseOver);
 
-    setMouseoverListener(
-      google.maps.event.addListener(
-        instance,
-        eventMap.onMouseOver,
-        onMouseOver
-      )
-    )
-  }, [onMouseOver])
+    return () => {
+      handler.remove();
+    }
+  }, [instance, onMouseOver])
 
   useEffect(() => {
     if (!instance || !onClick) return;
 
-    if (clickListener !== null) {
-      google.maps.event.removeListener(clickListener)
-    }
+    const handler = google.maps.event.addListener(instance, eventMap.onClick, onClick);
 
-    setClickListener(
-      google.maps.event.addListener(instance, eventMap.onClick, onClick)
-    )
-  }, [onClick])
+    return () => {
+      handler.remove();
+    }
+  }, [instance, onClick])
 
   useEffect(() => {
     if (!instance || !onClusteringBegin) return;
 
-    if (clusteringBeginListener !== null) {
-      google.maps.event.removeListener(clusteringBeginListener)
-    }
+    const handler = google.maps.event.addListener(instance, eventMap.onClusteringBegin, onClusteringBegin);
 
-    setClusteringBeginListener(
-      google.maps.event.addListener(
-        instance,
-        eventMap.onClusteringBegin,
-        onClusteringBegin
-      )
-    )
-  }, [onClusteringBegin])
+    return () => {
+      handler.remove();
+    }
+  }, [instance, onClusteringBegin])
 
   useEffect(() => {
     if (!instance || !onClusteringEnd) return;
 
-    if (clusteringEndListener !== null) {
-      google.maps.event.removeListener(clusteringEndListener)
-    }
+    const handler = google.maps.event.addListener(instance, eventMap.onClusteringEnd, onClusteringEnd);
 
-    setClusteringBeginListener(
-      google.maps.event.addListener(
-        instance,
-        eventMap.onClusteringEnd,
-        onClusteringEnd
-      )
-    )
-  }, [onClusteringEnd])
+    return () => {
+      handler.remove();
+    }
+  }, [instance, onClusteringEnd])
 
   useEffect(() => {
     if (!instance || averageCenter === undefined) return;
@@ -423,52 +390,6 @@ function MarkerClustererFunctional(
       updaterMap.zoomOnClick(clusterer, zoomOnClick)
     }
 
-    if (onMouseOut) {
-      setMouseoutListener(
-        google.maps.event.addListener(
-          clusterer,
-          eventMap.onMouseOut,
-          onMouseOut
-        )
-      )
-    }
-
-    if (onMouseOver) {
-      setMouseoverListener(
-        google.maps.event.addListener(
-          clusterer,
-          eventMap.onMouseOver,
-          onMouseOver
-        )
-      )
-    }
-
-    if (onClick) {
-      setClickListener(
-        google.maps.event.addListener(clusterer, eventMap.onClick, onClick)
-      )
-    }
-
-    if (onClusteringBegin) {
-      setClusteringBeginListener(
-        google.maps.event.addListener(
-          clusterer,
-          eventMap.onClusteringBegin,
-          onClusteringBegin
-        )
-      )
-    }
-
-    if (onClusteringEnd) {
-      setClusteringEndListener(
-        google.maps.event.addListener(
-          clusterer,
-          eventMap.onClusteringEnd,
-          onClusteringEnd
-        )
-      )
-    }
-
     setInstance(clusterer)
 
     if (onLoad) {
@@ -476,26 +397,6 @@ function MarkerClustererFunctional(
     }
 
     return () => {
-      if (mouseoutListener !== null) {
-        google.maps.event.removeListener(mouseoutListener)
-      }
-
-      if (mouseoverListener !== null) {
-        google.maps.event.removeListener(mouseoverListener)
-      }
-
-      if (clickListener !== null) {
-        google.maps.event.removeListener(clickListener)
-      }
-
-      if (clusteringBeginListener !== null) {
-        google.maps.event.removeListener(clusteringBeginListener)
-      }
-
-      if (clusteringEndListener !== null) {
-        google.maps.event.removeListener(clusteringEndListener)
-      }
-
       if (onUnmount) {
         onUnmount(clusterer)
       }
