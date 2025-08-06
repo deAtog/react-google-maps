@@ -1,11 +1,11 @@
 /* globals google */
 import {
   memo,
-  useState,
   useEffect,
   useContext,
   PureComponent,
   type ContextType,
+  useMemo,
 } from 'react'
 
 import invariant from 'invariant'
@@ -87,8 +87,18 @@ function DrawingManagerFunctional({
 }: DrawingManagerProps): null {
   const map = useContext<google.maps.Map | null>(MapContext)
 
-  const [instance, setInstance] =
-    useState<google.maps.drawing.DrawingManager | null>(null)
+  const instance = useMemo(() => {
+    invariant(
+      !!google.maps.drawing,
+      `Did you include prop libraries={['drawing']} in the URL? %s`,
+      google.maps.drawing
+    )
+
+    return new google.maps.drawing.DrawingManager({
+      ...options,
+      map,
+    });
+  }, [])
 
   // Order does matter
   useEffect(() => {
@@ -186,25 +196,6 @@ function DrawingManagerFunctional({
       onUnmount(instance);
     }
   }, [instance, onUnmount])
-
-  useEffect(() => {
-    invariant(
-      !!google.maps.drawing,
-      `Did you include prop libraries={['drawing']} in the URL? %s`,
-      google.maps.drawing
-    )
-
-    const drawingManager = new google.maps.drawing.DrawingManager({
-      ...options,
-      map,
-    })
-
-    if (drawingMode) {
-      drawingManager.setDrawingMode(drawingMode)
-    }
-
-    setInstance(drawingManager)
-  }, [])
 
   return null
 }
