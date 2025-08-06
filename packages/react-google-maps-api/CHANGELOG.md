@@ -1,4 +1,15 @@
 # Change Log
+# @deatog/react-google-maps-api
+
+## 1.0.0
+- Remove unnecessary state for event handlers.
+- Fire the onLoad and onUnmount events after all events and properties have been set or cleared respectively.
+- Use a set instead of an array for managing markers of the clusterer to improve performance of removing markers.
+- Use guard clauses to reduce code indentation.
+- Remove state for Google map objects. This eliminates an initial re-render.
+
+---
+# @react-google-maps/api
 
 ## 2.20.7 fix to LoadScript - adding option to pass api url to loader. by default it uses `https://maps.googleapis.com` but you can pass any other url
 
