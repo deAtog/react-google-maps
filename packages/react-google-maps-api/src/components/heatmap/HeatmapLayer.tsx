@@ -96,13 +96,31 @@ function HeatmapLayerFunctional({
     if (!instance) return;
 
     instance.setMap(map)
-  }, [map])
+
+    return () => {
+      instance.setMap(null);
+    }
+  }, [instance, map])
 
   useEffect(() => {
     if (!instance || !options) return;
 
     instance.setOptions(options)
   }, [instance, options])
+
+  useEffect(() => {
+    if (!instance || !onLoad) return;
+
+    onLoad(instance);
+  })
+
+  useEffect(() => {
+    if (!instance || !onUnmount) return;
+
+    return () => {
+      onUnmount(instance);
+    }
+  })
 
   useEffect(() => {
     const heatmapLayer = new google.maps.visualization.HeatmapLayer({
@@ -112,20 +130,6 @@ function HeatmapLayerFunctional({
     })
 
     setInstance(heatmapLayer)
-
-    if (onLoad) {
-      onLoad(heatmapLayer)
-    }
-
-    return () => {
-      if (instance !== null) {
-        if (onUnmount) {
-          onUnmount(instance)
-        }
-
-        instance.setMap(null)
-      }
-    }
   }, [])
 
   return null
