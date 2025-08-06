@@ -135,6 +135,10 @@ function RectangleFunctional({
     if (!instance) return;
 
     instance.setMap(map)
+
+    return () => {
+      instance.setMap(null);
+    }
   }, [map])
 
   useEffect(() => {
@@ -288,24 +292,26 @@ function RectangleFunctional({
   }, [instance, onBoundsChanged])
 
   useEffect(() => {
+    if (!instance || !onLoad) return;
+
+    onLoad(instance);
+  }, [instance, onLoad])
+
+  useEffect(() => {
+    if (!instance || !onUnmount) return;
+
+    return () => {
+      onUnmount(instance);
+    }
+  }, [instance, onUnmount])
+
+  useEffect(() => {
     const rectangle = new google.maps.Rectangle({
       ...options,
       map,
     })
 
     setInstance(rectangle)
-
-    if (onLoad) {
-      onLoad(rectangle)
-    }
-
-    return () => {
-      if (onUnmount) {
-        onUnmount(rectangle)
-      }
-
-      rectangle.setMap(null)
-    }
   }, [])
 
   return null
