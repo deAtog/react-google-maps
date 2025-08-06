@@ -193,165 +193,165 @@ function MarkerClustererFunctional(
     useState<google.maps.MapsEventListener | null>(null)
 
   useEffect(() => {
-    if (instance && onMouseOut) {
-      if (mouseoutListener !== null) {
-        google.maps.event.removeListener(mouseoutListener)
-      }
+    if (!instance || !onMouseOut) return;
 
-      setMouseoutListener(
-        google.maps.event.addListener(instance, eventMap.onMouseOut, onMouseOut)
-      )
+    if (mouseoutListener !== null) {
+      google.maps.event.removeListener(mouseoutListener)
     }
+
+    setMouseoutListener(
+      google.maps.event.addListener(instance, eventMap.onMouseOut, onMouseOut)
+    )
   }, [onMouseOut])
 
   useEffect(() => {
-    if (instance && onMouseOver) {
-      if (mouseoverListener !== null) {
-        google.maps.event.removeListener(mouseoverListener)
-      }
+    if (!instance || !onMouseOver) return;
 
-      setMouseoverListener(
-        google.maps.event.addListener(
-          instance,
-          eventMap.onMouseOver,
-          onMouseOver
-        )
-      )
+    if (mouseoverListener !== null) {
+      google.maps.event.removeListener(mouseoverListener)
     }
+
+    setMouseoverListener(
+      google.maps.event.addListener(
+        instance,
+        eventMap.onMouseOver,
+        onMouseOver
+      )
+    )
   }, [onMouseOver])
 
   useEffect(() => {
-    if (instance && onClick) {
-      if (clickListener !== null) {
-        google.maps.event.removeListener(clickListener)
-      }
+    if (!instance || !onClick) return;
 
-      setClickListener(
-        google.maps.event.addListener(instance, eventMap.onClick, onClick)
-      )
+    if (clickListener !== null) {
+      google.maps.event.removeListener(clickListener)
     }
+
+    setClickListener(
+      google.maps.event.addListener(instance, eventMap.onClick, onClick)
+    )
   }, [onClick])
 
   useEffect(() => {
-    if (instance && onClusteringBegin) {
-      if (clusteringBeginListener !== null) {
-        google.maps.event.removeListener(clusteringBeginListener)
-      }
+    if (!instance || !onClusteringBegin) return;
 
-      setClusteringBeginListener(
-        google.maps.event.addListener(
-          instance,
-          eventMap.onClusteringBegin,
-          onClusteringBegin
-        )
-      )
+    if (clusteringBeginListener !== null) {
+      google.maps.event.removeListener(clusteringBeginListener)
     }
+
+    setClusteringBeginListener(
+      google.maps.event.addListener(
+        instance,
+        eventMap.onClusteringBegin,
+        onClusteringBegin
+      )
+    )
   }, [onClusteringBegin])
 
   useEffect(() => {
-    if (instance && onClusteringEnd) {
-      if (clusteringEndListener !== null) {
-        google.maps.event.removeListener(clusteringEndListener)
-      }
+    if (!instance || !onClusteringEnd) return;
 
-      setClusteringBeginListener(
-        google.maps.event.addListener(
-          instance,
-          eventMap.onClusteringEnd,
-          onClusteringEnd
-        )
-      )
+    if (clusteringEndListener !== null) {
+      google.maps.event.removeListener(clusteringEndListener)
     }
+
+    setClusteringBeginListener(
+      google.maps.event.addListener(
+        instance,
+        eventMap.onClusteringEnd,
+        onClusteringEnd
+      )
+    )
   }, [onClusteringEnd])
 
   useEffect(() => {
-    if (typeof averageCenter !== 'undefined' && instance !== null) {
-      updaterMap.averageCenter(instance, averageCenter)
-    }
+    if (!instance || averageCenter === undefined) return;
+
+    updaterMap.averageCenter(instance, averageCenter);
   }, [instance, averageCenter])
 
   useEffect(() => {
-    if (typeof batchSizeIE !== 'undefined' && instance !== null) {
-      updaterMap.batchSizeIE(instance, batchSizeIE)
-    }
+    if (!instance || batchSizeIE === undefined) return;
+
+    updaterMap.batchSizeIE(instance, batchSizeIE)
   }, [instance, batchSizeIE])
 
   useEffect(() => {
-    if (typeof calculator !== 'undefined' && instance !== null) {
-      updaterMap.calculator(instance, calculator)
-    }
+    if (!instance || calculator === undefined) return;
+
+    updaterMap.calculator(instance, calculator)
   }, [instance, calculator])
 
   useEffect(() => {
-    if (typeof clusterClass !== 'undefined' && instance !== null) {
-      updaterMap.clusterClass(instance, clusterClass)
-    }
+    if (!instance || clusterClass === undefined) return;
+
+    updaterMap.clusterClass(instance, clusterClass)
   }, [instance, clusterClass])
 
   useEffect(() => {
-    if (typeof enableRetinaIcons !== 'undefined' && instance !== null) {
-      updaterMap.enableRetinaIcons(instance, enableRetinaIcons)
-    }
+    if (!instance || enableRetinaIcons === undefined) return;
+
+    updaterMap.enableRetinaIcons(instance, enableRetinaIcons)
   }, [instance, enableRetinaIcons])
 
   useEffect(() => {
-    if (typeof gridSize !== 'undefined' && instance !== null) {
-      updaterMap.gridSize(instance, gridSize)
-    }
+    if (!instance || gridSize === undefined) return;
+
+    updaterMap.gridSize(instance, gridSize)
   }, [instance, gridSize])
 
   useEffect(() => {
-    if (typeof ignoreHidden !== 'undefined' && instance !== null) {
-      updaterMap.ignoreHidden(instance, ignoreHidden)
-    }
+    if (!instance || ignoreHidden === undefined) return;
+
+    updaterMap.ignoreHidden(instance, ignoreHidden)
   }, [instance, ignoreHidden])
 
   useEffect(() => {
-    if (typeof imageExtension !== 'undefined' && instance !== null) {
-      updaterMap.imageExtension(instance, imageExtension)
-    }
+    if (!instance || imageExtension === undefined) return;
+
+    updaterMap.imageExtension(instance, imageExtension)
   }, [instance, imageExtension])
 
   useEffect(() => {
-    if (typeof imagePath !== 'undefined' && instance !== null) {
-      updaterMap.imagePath(instance, imagePath)
-    }
+    if (!instance || imagePath === undefined) return;
+
+    updaterMap.imagePath(instance, imagePath)
   }, [instance, imagePath])
 
   useEffect(() => {
-    if (typeof imageSizes !== 'undefined' && instance !== null) {
-      updaterMap.imageSizes(instance, imageSizes)
-    }
+    if (!instance || imageSizes === undefined) return;
+
+    updaterMap.imageSizes(instance, imageSizes)
   }, [instance, imageSizes])
 
   useEffect(() => {
-    if (typeof maxZoom !== 'undefined' && instance !== null) {
-      updaterMap.maxZoom(instance, maxZoom)
-    }
+    if (!instance || maxZoom === undefined) return;
+
+    updaterMap.maxZoom(instance, maxZoom)
   }, [instance, maxZoom])
 
   useEffect(() => {
-    if (typeof minimumClusterSize !== 'undefined' && instance !== null) {
-      updaterMap.minimumClusterSize(instance, minimumClusterSize)
-    }
+    if (!instance || minimumClusterSize === undefined) return;
+
+    updaterMap.minimumClusterSize(instance, minimumClusterSize)
   }, [instance, minimumClusterSize])
 
   useEffect(() => {
-    if (typeof styles !== 'undefined' && instance !== null) {
-      updaterMap.styles(instance, styles)
-    }
+    if (!instance || styles === undefined) return;
+
+    updaterMap.styles(instance, styles)
   }, [instance, styles])
 
   useEffect(() => {
-    if (typeof title !== 'undefined' && instance !== null) {
-      updaterMap.title(instance, title)
-    }
+    if (!instance || title === undefined) return;
+
+    updaterMap.title(instance, title)
   }, [instance, title])
 
   useEffect(() => {
-    if (typeof zoomOnClick !== 'undefined' && instance !== null) {
-      updaterMap.zoomOnClick(instance, zoomOnClick)
-    }
+    if (!instance || zoomOnClick === undefined) return;
+
+    updaterMap.zoomOnClick(instance, zoomOnClick)
   }, [instance, zoomOnClick])
 
   useEffect(() => {
