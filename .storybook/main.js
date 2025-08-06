@@ -91,8 +91,7 @@ module.exports = {
   stories: [
     '../packages/react-google-maps-api/**/*.stories.mdx',
     '../packages/react-google-maps-api/**/*.stories.@(js|jsx|ts|tsx)',
-    '../packages/react-google-maps-api-gatsby-example/**/*.stories.mdx',
-    '../packages/react-google-maps-api-gatsby-example/**/*.stories.@(js|jsx|ts|tsx)',
+    '../packages/vike-example/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   plugins: [
