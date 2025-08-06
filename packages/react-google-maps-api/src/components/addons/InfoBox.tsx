@@ -101,7 +101,7 @@ function InfoBoxFunctional({
 }: InfoBoxProps): ReactPortal | null {
   const map = useContext<google.maps.Map | null>(MapContext)
 
-  const containerElementRef = useRef(document.createElement('div'));
+  const containerElementRef = useRef<HTMLDivElement>(document.createElement('div'));
 
   const instance = useMemo(() => {
     const { position, ...infoBoxOptions }: InfoBoxOptions =
@@ -123,7 +123,7 @@ function InfoBoxFunctional({
     infoBox.setContent(containerElementRef.current);
 
     return infoBox;
-  }, [containerElementRef])
+  }, [])
 
   // Order does matter
   useEffect(() => {
