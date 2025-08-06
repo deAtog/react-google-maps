@@ -133,13 +133,13 @@ function InfoBoxFunctional({
           new google.maps.LatLng(position.lat, position.lng)
 
     instance.setPosition(positionLatLng)
-  }, [position])
+  }, [instance, position])
 
   useEffect(() => {
     if (!instance || typeof zIndex !== 'number') return;
 
     instance.setZIndex(zIndex)
-  }, [zIndex])
+  }, [instance, zIndex])
 
   useEffect(() => {
     if (!instance || !onCloseClick) return;
@@ -240,7 +240,7 @@ function InfoBoxFunctional({
         instance.close()
       }
     }
-  }, [])
+  }, [map, onLoad, onUnmount])
 
   return containerElementRef.current
     ? createPortal(Children.only(children), containerElementRef.current)
