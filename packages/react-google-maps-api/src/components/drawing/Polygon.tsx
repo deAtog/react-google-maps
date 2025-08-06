@@ -1,9 +1,9 @@
 /* global google */
 import {
   memo,
-  useState,
   useEffect,
   useContext,
+  useMemo,
   PureComponent,
   type ContextType,
 } from 'react'
@@ -150,7 +150,12 @@ function PolygonFunctional({
 }: PolygonProps): null {
   const map = useContext<google.maps.Map | null>(MapContext)
 
-  const [instance, setInstance] = useState<google.maps.Polygon | null>(null)
+  const instance = useMemo(() => {
+    return new google.maps.Polygon({
+      ...options,
+      map,
+    })
+  }, []);
 
   // Order does matter
   useEffect(() => {
@@ -344,15 +349,6 @@ function PolygonFunctional({
       onUnmount(instance);
     }
   }, [instance, onUnmount])
-
-  useEffect(() => {
-    const polygon = new google.maps.Polygon({
-      ...options,
-      map,
-    })
-
-    setInstance(polygon)
-  }, [])
 
   return null
 }
