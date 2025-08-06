@@ -206,19 +206,25 @@ function PolygonFunctional({
   }, [instance, onDblClick])
 
   useEffect(() => {
-    if (!instance) return;
+    if (!instance || !onEdit) return;
 
-    google.maps.event.addListener(instance.getPath(), 'insert_at', () => {
-      onEdit?.(instance)
+    const hInsertAt = google.maps.event.addListener(instance.getPath(), 'insert_at', () => {
+      onEdit(instance)
     })
 
-    google.maps.event.addListener(instance.getPath(), 'set_at', () => {
-      onEdit?.(instance)
+    const hSetAt = google.maps.event.addListener(instance.getPath(), 'set_at', () => {
+      onEdit(instance)
     })
 
-    google.maps.event.addListener(instance.getPath(), 'remove_at', () => {
-      onEdit?.(instance)
+    const hRemoveAt = google.maps.event.addListener(instance.getPath(), 'remove_at', () => {
+      onEdit(instance)
     })
+
+    return () => {
+      hInsertAt.remove();
+      hSetAt.remove();
+      hRemoveAt.remove();
+    }
   }, [instance, onEdit])
 
   useEffect(() => {
