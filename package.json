@@ -1,6 +1,6 @@
 {
   "name": "@deatog/react-google-maps",
-  "version": "2.9.10",
+  "version": "1.0.0-alpha.1",
   "private": true,
   "description": "React.js Google Maps API integration",
   "license": "MIT",
