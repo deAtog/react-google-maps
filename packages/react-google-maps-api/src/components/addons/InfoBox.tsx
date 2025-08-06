@@ -3,9 +3,9 @@ import {
   memo,
   useRef,
   Children,
-  useState,
   useEffect,
   useContext,
+  useMemo,
   PureComponent,
   type ReactNode,
   type ReactPortal,
@@ -101,9 +101,29 @@ function InfoBoxFunctional({
 }: InfoBoxProps): ReactPortal | null {
   const map = useContext<google.maps.Map | null>(MapContext)
 
-  const [instance, setInstance] = useState<GoogleMapsInfoBox | null>(null)
+  const containerElementRef = useRef(document.createElement('div'));
 
-  const containerElementRef = useRef<HTMLDivElement | null>(null)
+  const instance = useMemo(() => {
+    const { position, ...infoBoxOptions }: InfoBoxOptions =
+    options || defaultOptions
+
+    let positionLatLng: google.maps.LatLng | undefined
+
+    if (position && !(position instanceof google.maps.LatLng)) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      positionLatLng = new google.maps.LatLng(position.lat, position.lng)
+    }
+
+    const infoBox = new GoogleMapsInfoBox({
+      ...infoBoxOptions,
+      ...(positionLatLng ? { position: positionLatLng } : {}),
+    })
+
+    infoBox.setContent(containerElementRef.current);
+
+    return infoBox;
+  }, [containerElementRef])
 
   // Order does matter
   useEffect(() => {
@@ -218,30 +238,6 @@ function InfoBoxFunctional({
       onUnmount(instance);
     }
   }, [instance, onUnmount])
-
-  useEffect(() => {
-    const { position, ...infoBoxOptions }: InfoBoxOptions =
-      options || defaultOptions
-
-    let positionLatLng: google.maps.LatLng | undefined
-
-    if (position && !(position instanceof google.maps.LatLng)) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      positionLatLng = new google.maps.LatLng(position.lat, position.lng)
-    }
-
-    const infoBox = new GoogleMapsInfoBox({
-      ...infoBoxOptions,
-      ...(positionLatLng ? { position: positionLatLng } : {}),
-    })
-
-    containerElementRef.current = document.createElement('div')
-
-    setInstance(infoBox)
-
-    infoBox.setContent(containerElementRef.current)
-  }, [])
 
   return containerElementRef.current
     ? createPortal(Children.only(children), containerElementRef.current)
