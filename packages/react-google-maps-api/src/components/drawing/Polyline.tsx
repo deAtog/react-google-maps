@@ -151,19 +151,19 @@ function PolylineFunctional({
   }, [instance, options])
 
   useEffect(() => {
-    if (draggable === undefined) return;
+    if (typeof draggable === 'undefined') return;
 
     instance.setDraggable(draggable);
   }, [instance, draggable])
 
   useEffect(() => {
-    if (editable === undefined) return;
+    if (typeof editable === 'undefined') return;
 
     instance.setEditable(editable)
   }, [instance, editable])
 
   useEffect(() => {
-    if (visible === undefined) return;
+    if (typeof visible === 'undefined') return;
 
     instance.setVisible(visible)
   }, [instance, visible])

@@ -254,7 +254,7 @@ function MarkerFunctional({
   }, [instance, options])
 
   useEffect(() => {
-    if (draggable === undefined) return;
+    if (typeof draggable === 'undefined') return;
 
     instance.setDraggable(draggable);
   }, [instance, draggable])
@@ -266,7 +266,7 @@ function MarkerFunctional({
   }, [instance, position])
 
   useEffect(() => {
-    if (visible === undefined) return;
+    if (typeof visible === 'undefined') return;
 
     instance.setVisible(visible);
   }, [instance, visible])
@@ -276,49 +276,49 @@ function MarkerFunctional({
   }, [instance, animation])
 
   useEffect(() => {
-    if (clickable === undefined) return;
+    if (typeof clickable === 'undefined') return;
 
     instance.setClickable(clickable);
   }, [instance, clickable])
 
   useEffect(() => {
-    if (cursor === undefined) return;
+    if (typeof cursor === 'undefined') return;
 
     instance.setCursor(cursor);
   }, [instance, cursor])
 
   useEffect(() => {
-    if (icon === undefined) return;
+    if (typeof icon === 'undefined') return;
 
     instance.setIcon(icon);
   }, [instance, icon])
 
   useEffect(() => {
-    if (label === undefined) return;
+    if (typeof label === 'undefined') return;
 
     instance.setLabel(label);
   }, [instance, label])
 
   useEffect(() => {
-    if (opacity === undefined) return;
+    if (typeof opacity === 'undefined') return;
 
     instance.setOpacity(opacity);
   }, [instance, opacity])
 
   useEffect(() => {
-    if (shape === undefined) return;
+    if (typeof shape === 'undefined') return;
 
     instance.setShape(shape);
   }, [instance, shape])
 
   useEffect(() => {
-    if (title === undefined) return;
+    if (typeof title === 'undefined') return;
 
     instance.setTitle(title);
   }, [instance, title])
 
   useEffect(() => {
-    if (zIndex === undefined) return;
+    if (typeof zIndex === 'undefined') return;
 
     instance.setZIndex(zIndex)
   }, [instance, zIndex])

@@ -242,91 +242,91 @@ function MarkerClustererFunctional(
   }, [instance, onClusteringEnd])
 
   useEffect(() => {
-    if (!instance || averageCenter === undefined) return;
+    if (!instance || typeof averageCenter === 'undefined') return;
 
     updaterMap.averageCenter(instance, averageCenter);
   }, [instance, averageCenter])
 
   useEffect(() => {
-    if (!instance || batchSizeIE === undefined) return;
+    if (!instance || typeof batchSizeIE === 'undefined') return;
 
     updaterMap.batchSizeIE(instance, batchSizeIE)
   }, [instance, batchSizeIE])
 
   useEffect(() => {
-    if (!instance || calculator === undefined) return;
+    if (!instance || typeof calculator === 'undefined') return;
 
     updaterMap.calculator(instance, calculator)
   }, [instance, calculator])
 
   useEffect(() => {
-    if (!instance || clusterClass === undefined) return;
+    if (!instance || typeof clusterClass === 'undefined') return;
 
     updaterMap.clusterClass(instance, clusterClass)
   }, [instance, clusterClass])
 
   useEffect(() => {
-    if (!instance || enableRetinaIcons === undefined) return;
+    if (!instance || typeof enableRetinaIcons === 'undefined') return;
 
     updaterMap.enableRetinaIcons(instance, enableRetinaIcons)
   }, [instance, enableRetinaIcons])
 
   useEffect(() => {
-    if (!instance || gridSize === undefined) return;
+    if (!instance || typeof gridSize === 'undefined') return;
 
     updaterMap.gridSize(instance, gridSize)
   }, [instance, gridSize])
 
   useEffect(() => {
-    if (!instance || ignoreHidden === undefined) return;
+    if (!instance || typeof ignoreHidden === 'undefined') return;
 
     updaterMap.ignoreHidden(instance, ignoreHidden)
   }, [instance, ignoreHidden])
 
   useEffect(() => {
-    if (!instance || imageExtension === undefined) return;
+    if (!instance || typeof imageExtension === 'undefined') return;
 
     updaterMap.imageExtension(instance, imageExtension)
   }, [instance, imageExtension])
 
   useEffect(() => {
-    if (!instance || imagePath === undefined) return;
+    if (!instance || typeof imagePath === 'undefined') return;
 
     updaterMap.imagePath(instance, imagePath)
   }, [instance, imagePath])
 
   useEffect(() => {
-    if (!instance || imageSizes === undefined) return;
+    if (!instance || typeof imageSizes === 'undefined') return;
 
     updaterMap.imageSizes(instance, imageSizes)
   }, [instance, imageSizes])
 
   useEffect(() => {
-    if (!instance || maxZoom === undefined) return;
+    if (!instance || typeof maxZoom === 'undefined') return;
 
     updaterMap.maxZoom(instance, maxZoom)
   }, [instance, maxZoom])
 
   useEffect(() => {
-    if (!instance || minimumClusterSize === undefined) return;
+    if (!instance || typeof minimumClusterSize === 'undefined') return;
 
     updaterMap.minimumClusterSize(instance, minimumClusterSize)
   }, [instance, minimumClusterSize])
 
   useEffect(() => {
-    if (!instance || styles === undefined) return;
+    if (!instance || typeof styles === 'undefined') return;
 
     updaterMap.styles(instance, styles)
   }, [instance, styles])
 
   useEffect(() => {
-    if (!instance || title === undefined) return;
+    if (!instance || typeof title === 'undefined') return;
 
     updaterMap.title(instance, title)
   }, [instance, title])
 
   useEffect(() => {
-    if (!instance || zoomOnClick === undefined) return;
+    if (!instance || typeof zoomOnClick === 'undefined') return;
 
     updaterMap.zoomOnClick(instance, zoomOnClick)
   }, [instance, zoomOnClick])
