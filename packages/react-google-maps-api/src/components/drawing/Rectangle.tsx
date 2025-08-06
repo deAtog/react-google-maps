@@ -137,8 +137,6 @@ function RectangleFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (!instance) return;
-
     instance.setMap(map)
 
     return () => {
@@ -147,37 +145,37 @@ function RectangleFunctional({
   }, [instance, map])
 
   useEffect(() => {
-    if (!instance || !options) return;
+    if (!options) return;
 
     instance.setOptions(options)
   }, [instance, options])
 
   useEffect(() => {
-    if (!instance || draggable === undefined) return;
+    if (draggable === undefined) return;
 
     instance.setDraggable(draggable)
   }, [instance, draggable])
 
   useEffect(() => {
-    if (!instance || editable === undefined) return;
+    if (editable === undefined) return;
 
     instance.setEditable(editable)
   }, [instance, editable])
 
   useEffect(() => {
-    if (!instance || visible === undefined) return;
+    if (visible === undefined) return;
 
     instance.setVisible(visible)
   }, [instance, visible])
 
   useEffect(() => {
-    if (!instance || bounds === undefined) return;
+    if (bounds === undefined) return;
 
     instance.setBounds(bounds)
   }, [instance, bounds])
 
   useEffect(() => {
-    if (!instance || !onDblClick) return;
+    if (!onDblClick) return;
 
     const handler = google.maps.event.addListener(instance, 'dblclick', onDblClick);
 
@@ -187,7 +185,7 @@ function RectangleFunctional({
   }, [instance, onDblClick])
 
   useEffect(() => {
-    if (!instance || !onDragEnd) return;
+    if (!onDragEnd) return;
 
     const handler = google.maps.event.addListener(instance, 'dragend', onDragEnd);
 
@@ -197,7 +195,7 @@ function RectangleFunctional({
   }, [instance, onDragEnd])
 
   useEffect(() => {
-    if (!instance || !onDragStart) return;
+    if (!onDragStart) return;
 
     const handler = google.maps.event.addListener(instance, 'dragstart', onDragStart);
 
@@ -207,7 +205,7 @@ function RectangleFunctional({
   }, [instance, onDragStart])
 
   useEffect(() => {
-    if (!instance || !onMouseDown) return;
+    if (!onMouseDown) return;
 
     const handler = google.maps.event.addListener(instance, 'mousedown', onMouseDown);
 
@@ -217,7 +215,7 @@ function RectangleFunctional({
   }, [instance, onMouseDown])
 
   useEffect(() => {
-    if (!instance || !onMouseMove) return;
+    if (!onMouseMove) return;
 
     const handler = google.maps.event.addListener(instance, 'mousemove', onMouseMove);
 
@@ -227,7 +225,7 @@ function RectangleFunctional({
   }, [instance, onMouseMove])
 
   useEffect(() => {
-    if (!instance || !onMouseOut) return;
+    if (!onMouseOut) return;
 
     const handler = google.maps.event.addListener(instance, 'mouseout', onMouseOut);
 
@@ -237,7 +235,7 @@ function RectangleFunctional({
   }, [instance, onMouseOut])
 
   useEffect(() => {
-    if (!instance || !onMouseOver) return;
+    if (!onMouseOver) return;
 
     const handler = google.maps.event.addListener(instance, 'mouseover', onMouseOver);
 
@@ -247,7 +245,7 @@ function RectangleFunctional({
   }, [instance, onMouseOver])
 
   useEffect(() => {
-    if (!instance || !onMouseUp) return;
+    if (!onMouseUp) return;
 
     const handler = google.maps.event.addListener(instance, 'mouseup', onMouseUp);
 
@@ -257,7 +255,7 @@ function RectangleFunctional({
   }, [instance, onMouseUp])
 
   useEffect(() => {
-    if (!instance || !onRightClick) return;
+    if (!onRightClick) return;
 
     const handler = google.maps.event.addListener(instance, 'rightclick', onRightClick);
 
@@ -267,7 +265,7 @@ function RectangleFunctional({
   }, [instance, onRightClick])
 
   useEffect(() => {
-    if (!instance || !onClick) return;
+    if (!onClick) return;
 
     const handler = google.maps.event.addListener(instance, 'click', onClick);
 
@@ -277,7 +275,7 @@ function RectangleFunctional({
   }, [instance, onClick])
 
   useEffect(() => {
-    if (!instance || !onDrag) return;
+    if (!onDrag) return;
 
     const handler = google.maps.event.addListener(instance, 'drag', onDrag);
 
@@ -287,7 +285,7 @@ function RectangleFunctional({
   }, [instance, onDrag])
 
   useEffect(() => {
-    if (!instance || !onBoundsChanged) return;
+    if (!onBoundsChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'bounds_changed', onBoundsChanged);
 
@@ -297,13 +295,13 @@ function RectangleFunctional({
   }, [instance, onBoundsChanged])
 
   useEffect(() => {
-    if (!instance || !onLoad) return;
+    if (!onLoad) return;
 
     onLoad(instance);
   }, [instance, onLoad])
 
   useEffect(() => {
-    if (!instance || !onUnmount) return;
+    if (!onUnmount) return;
 
     return () => {
       onUnmount(instance);
