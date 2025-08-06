@@ -177,63 +177,61 @@ function PolygonFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (instance !== null) {
-      instance.setMap(map)
-    }
+    if (!instance) return;
+
+    instance.setMap(map)
   }, [map])
 
   useEffect(() => {
-    if (typeof options !== 'undefined' && instance !== null) {
-      instance.setOptions(options)
-    }
+    if (!instance || options === undefined) return;
+
+    instance.setOptions(options)
   }, [instance, options])
 
   useEffect(() => {
-    if (typeof draggable !== 'undefined' && instance !== null) {
-      instance.setDraggable(draggable)
-    }
+    if (!instance || draggable === undefined) return;
+
+    instance.setDraggable(draggable)
   }, [instance, draggable])
 
   useEffect(() => {
-    if (typeof editable !== 'undefined' && instance !== null) {
-      instance.setEditable(editable)
-    }
+    if (!instance || editable === undefined) return;
+
+    instance.setEditable(editable)
   }, [instance, editable])
 
   useEffect(() => {
-    if (typeof visible !== 'undefined' && instance !== null) {
-      instance.setVisible(visible)
-    }
+    if (!instance || visible === undefined) return;
+
+    instance.setVisible(visible)
   }, [instance, visible])
 
   useEffect(() => {
-    if (typeof path !== 'undefined' && instance !== null) {
-      instance.setPath(path)
-    }
+    if (!instance || !path) return;
+
+    instance.setPath(path)
   }, [instance, path])
 
   useEffect(() => {
-    if (typeof paths !== 'undefined' && instance !== null) {
-      instance.setPaths(paths)
-    }
+    if (!instance || !paths) return;
+
+    instance.setPaths(paths)
   }, [instance, paths])
 
   useEffect(() => {
-    if (instance && typeof onDblClick === 'function') {
-      if (dblclickListener !== null) {
-        google.maps.event.removeListener(dblclickListener)
-      }
+    if (!instance || !onDblClick) return;
 
-      setDblclickListener(
-        google.maps.event.addListener(instance, 'dblclick', onDblClick)
-      )
+    if (dblclickListener !== null) {
+      google.maps.event.removeListener(dblclickListener)
     }
+
+    setDblclickListener(
+      google.maps.event.addListener(instance, 'dblclick', onDblClick)
+    )
   }, [onDblClick])
 
   useEffect(() => {
-    if (!instance) {
-      return
-    }
+    if (!instance) return;
 
     google.maps.event.addListener(instance.getPath(), 'insert_at', () => {
       onEdit?.(instance)
@@ -249,121 +247,121 @@ function PolygonFunctional({
   }, [instance, onEdit])
 
   useEffect(() => {
-    if (instance && typeof onDragEnd === 'function') {
-      if (dragendListener !== null) {
-        google.maps.event.removeListener(dragendListener)
-      }
+    if (!instance || !onDragEnd) return;
 
-      setDragendListener(
-        google.maps.event.addListener(instance, 'dragend', onDragEnd)
-      )
+    if (dragendListener !== null) {
+      google.maps.event.removeListener(dragendListener)
     }
+
+    setDragendListener(
+      google.maps.event.addListener(instance, 'dragend', onDragEnd)
+    )
   }, [onDragEnd])
 
   useEffect(() => {
-    if (instance && typeof onDragStart === 'function') {
-      if (dragstartListener !== null) {
-        google.maps.event.removeListener(dragstartListener)
-      }
+    if (!instance || !onDragStart) return;
 
-      setDragstartListener(
-        google.maps.event.addListener(instance, 'dragstart', onDragStart)
-      )
+    if (dragstartListener !== null) {
+      google.maps.event.removeListener(dragstartListener)
     }
+
+    setDragstartListener(
+      google.maps.event.addListener(instance, 'dragstart', onDragStart)
+    )
   }, [onDragStart])
 
   useEffect(() => {
-    if (instance && typeof onMouseDown === 'function') {
-      if (mousedownListener !== null) {
-        google.maps.event.removeListener(mousedownListener)
-      }
+    if (!instance || !onMouseDown) return;
 
-      setMousedownListener(
-        google.maps.event.addListener(instance, 'mousedown', onMouseDown)
-      )
+    if (mousedownListener !== null) {
+      google.maps.event.removeListener(mousedownListener)
     }
+
+    setMousedownListener(
+      google.maps.event.addListener(instance, 'mousedown', onMouseDown)
+    )
   }, [onMouseDown])
 
   useEffect(() => {
-    if (instance && typeof onMouseMove === 'function') {
-      if (mousemoveListener !== null) {
-        google.maps.event.removeListener(mousemoveListener)
-      }
+    if (!instance || !onMouseMove) return;
 
-      setMousemoveListener(
-        google.maps.event.addListener(instance, 'mousemove', onMouseMove)
-      )
+    if (mousemoveListener !== null) {
+      google.maps.event.removeListener(mousemoveListener)
     }
+
+    setMousemoveListener(
+      google.maps.event.addListener(instance, 'mousemove', onMouseMove)
+    )
   }, [onMouseMove])
 
   useEffect(() => {
-    if (instance && typeof onMouseOut === 'function') {
-      if (mouseoutListener !== null) {
-        google.maps.event.removeListener(mouseoutListener)
-      }
+    if (!instance || !onMouseOut) return;
 
-      setMouseoutListener(
-        google.maps.event.addListener(instance, 'mouseout', onMouseOut)
-      )
+    if (mouseoutListener !== null) {
+      google.maps.event.removeListener(mouseoutListener)
     }
+
+    setMouseoutListener(
+      google.maps.event.addListener(instance, 'mouseout', onMouseOut)
+    )
   }, [onMouseOut])
 
   useEffect(() => {
-    if (instance && typeof onMouseOver === 'function') {
-      if (mouseoverListener !== null) {
-        google.maps.event.removeListener(mouseoverListener)
-      }
+    if (!instance || !onMouseOver) return;
 
-      setMouseoverListener(
-        google.maps.event.addListener(instance, 'mouseover', onMouseOver)
-      )
+    if (mouseoverListener !== null) {
+      google.maps.event.removeListener(mouseoverListener)
     }
+
+    setMouseoverListener(
+      google.maps.event.addListener(instance, 'mouseover', onMouseOver)
+    )
   }, [onMouseOver])
 
   useEffect(() => {
-    if (instance && typeof onMouseUp === 'function') {
-      if (mouseupListener !== null) {
-        google.maps.event.removeListener(mouseupListener)
-      }
+    if (!instance || !onMouseUp) return;
 
-      setMouseupListener(
-        google.maps.event.addListener(instance, 'mouseup', onMouseUp)
-      )
+    if (mouseupListener !== null) {
+      google.maps.event.removeListener(mouseupListener)
     }
+
+    setMouseupListener(
+      google.maps.event.addListener(instance, 'mouseup', onMouseUp)
+    )
   }, [onMouseUp])
 
   useEffect(() => {
-    if (instance && typeof onRightClick === 'function') {
-      if (rightclickListener !== null) {
-        google.maps.event.removeListener(rightclickListener)
-      }
+    if (!instance || !onRightClick) return;
 
-      setRightclickListener(
-        google.maps.event.addListener(instance, 'rightclick', onRightClick)
-      )
+    if (rightclickListener !== null) {
+      google.maps.event.removeListener(rightclickListener)
     }
+
+    setRightclickListener(
+      google.maps.event.addListener(instance, 'rightclick', onRightClick)
+    )
   }, [onRightClick])
 
   useEffect(() => {
-    if (instance && typeof onClick === 'function') {
-      if (clickListener !== null) {
-        google.maps.event.removeListener(clickListener)
-      }
+    if (!instance || !onClick) return;
 
-      setClickListener(
-        google.maps.event.addListener(instance, 'click', onClick)
-      )
+    if (clickListener !== null) {
+      google.maps.event.removeListener(clickListener)
     }
+
+    setClickListener(
+      google.maps.event.addListener(instance, 'click', onClick)
+    )
   }, [onClick])
 
   useEffect(() => {
-    if (instance && typeof onDrag === 'function') {
-      if (dragListener !== null) {
-        google.maps.event.removeListener(dragListener)
-      }
+    if (!instance || !onDrag) return;
 
-      setDragListener(google.maps.event.addListener(instance, 'drag', onDrag))
+    if (dragListener !== null) {
+      google.maps.event.removeListener(dragListener)
     }
+
+    setDragListener(google.maps.event.addListener(instance, 'drag', onDrag))
   }, [onDrag])
 
   useEffect(() => {
