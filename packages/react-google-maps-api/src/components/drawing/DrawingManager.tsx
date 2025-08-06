@@ -92,9 +92,13 @@ function DrawingManagerFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (!instance) return;
+    if (!instance || !map) return;
 
     instance.setMap(map);
+
+    return () => {
+      instance.setMap(null);
+    }
   }, [map])
 
   useEffect(() => {
@@ -170,6 +174,20 @@ function DrawingManagerFunctional({
   }, [instance, onRectangleComplete])
 
   useEffect(() => {
+    if (!instance || !onLoad) return;
+
+    onLoad(instance);
+  }, [instance, onLoad])
+
+  useEffect(() => {
+    if (!instance || !onUnmount) return;
+
+    return () => {
+      onUnmount(instance);
+    }
+  }, [instance, onUnmount])
+
+  useEffect(() => {
     invariant(
       !!google.maps.drawing,
       `Did you include prop libraries={['drawing']} in the URL? %s`,
@@ -186,20 +204,6 @@ function DrawingManagerFunctional({
     }
 
     setInstance(drawingManager)
-
-    if (onLoad) {
-      onLoad(drawingManager)
-    }
-
-    return () => {
-      if (instance !== null) {
-        if (onUnmount) {
-          onUnmount(instance)
-        }
-
-        instance.setMap(null)
-      }
-    }
   }, [])
 
   return null
