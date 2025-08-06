@@ -138,13 +138,7 @@ function CircleFunctional({
   const [instance, setInstance] = useState<google.maps.Circle | null>(null)
 
   // Order does matter
-  useEffect(() => {
-    if (!instance) return;
-
-    instance.setMap(map)
-  }, [map])
-
-  useEffect(() => {
+   useEffect(() => {
     if (typeof options === 'undefined' || !instance) return;
 
     instance.setOptions(options);
@@ -311,24 +305,36 @@ function CircleFunctional({
   }, [instance, onRadiusChanged])
 
   useEffect(() => {
+    if (!instance || !map) return;
+
+    instance.setMap(map)
+
+    return () => {
+      instance.setMap(null);
+    }
+  }, [instance, map])
+
+  useEffect(() => {
+    if (!instance || !onLoad) return;
+
+    onLoad(instance)
+  }, [instance, onLoad])
+
+  useEffect(() => {
+    if (!instance || !onUnmount) return;
+
+    return () => {
+      onUnmount(instance);
+    }
+  }, [instance, onUnmount])
+
+  useEffect(() => {
     const circle = new google.maps.Circle({
       ...(options || defaultOptions),
       map,
     })
 
     setInstance(circle)
-
-    if (onLoad) {
-      onLoad(circle)
-    }
-
-    return () => {
-      if (onUnmount) {
-        onUnmount(circle)
-      }
-
-      circle.setMap(null)
-    }
   }, [])
 
   return null
