@@ -322,6 +322,20 @@ function MarkerClustererFunctional(
   }, [instance, zoomOnClick])
 
   useEffect(() => {
+    if (!instance || !onLoad) return;
+
+    onLoad(instance);
+  }, [instance, onLoad])
+
+  useEffect(() => {
+    if (!instance || !onUnmount) return;
+
+    return () => {
+      onUnmount(instance);
+    }
+  })
+
+  useEffect(() => {
     if (!map) return
 
     const clustererOptions = {
@@ -331,16 +345,6 @@ function MarkerClustererFunctional(
     const clusterer = new Clusterer(map, [], clustererOptions)
 
     setInstance(clusterer)
-
-    if (onLoad) {
-      onLoad(clusterer)
-    }
-
-    return () => {
-      if (onUnmount) {
-        onUnmount(clusterer)
-      }
-    }
   }, [])
 
   return instance !== null ? children(instance) || null : null
