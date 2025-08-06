@@ -105,117 +105,117 @@ function DrawingManagerFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (instance !== null) {
-      instance.setMap(map)
-    }
+    if (!instance) return;
+
+    instance.setMap(map);
   }, [map])
 
   useEffect(() => {
-    if (options && instance !== null) {
-      instance.setOptions(options)
-    }
+    if (!instance || !options) return;
+
+    instance.setOptions(options);
   }, [instance, options])
 
   useEffect(() => {
-    if (instance !== null) {
-      instance.setDrawingMode(drawingMode ?? null)
-    }
+    if (!instance) return;
+
+    instance.setDrawingMode(drawingMode ?? null);
   }, [instance, drawingMode])
 
   useEffect(() => {
-    if (instance && onCircleComplete) {
-      if (circlecompleteListener !== null) {
-        google.maps.event.removeListener(circlecompleteListener)
-      }
+    if (!instance || !onCircleComplete) return;
 
-      setCircleCompleteListener(
-        google.maps.event.addListener(
-          instance,
-          'circlecomplete',
-          onCircleComplete
-        )
-      )
+    if (circlecompleteListener !== null) {
+      google.maps.event.removeListener(circlecompleteListener)
     }
+
+    setCircleCompleteListener(
+      google.maps.event.addListener(
+        instance,
+        'circlecomplete',
+        onCircleComplete
+      )
+    )
   }, [instance, onCircleComplete])
 
   useEffect(() => {
-    if (instance && onMarkerComplete) {
-      if (markercompleteListener !== null) {
-        google.maps.event.removeListener(markercompleteListener)
-      }
+    if (!instance || !onMarkerComplete) return;
 
-      setMarkerCompleteListener(
-        google.maps.event.addListener(
-          instance,
-          'markercomplete',
-          onMarkerComplete
-        )
-      )
+    if (markercompleteListener !== null) {
+      google.maps.event.removeListener(markercompleteListener)
     }
+
+    setMarkerCompleteListener(
+      google.maps.event.addListener(
+        instance,
+        'markercomplete',
+        onMarkerComplete
+      )
+    )
   }, [instance, onMarkerComplete])
 
   useEffect(() => {
-    if (instance && onOverlayComplete) {
-      if (overlaycompleteListener !== null) {
-        google.maps.event.removeListener(overlaycompleteListener)
-      }
+    if (!instance || !onOverlayComplete) return;
 
-      setOverlayCompleteListener(
-        google.maps.event.addListener(
-          instance,
-          'overlaycomplete',
-          onOverlayComplete
-        )
-      )
+    if (overlaycompleteListener !== null) {
+      google.maps.event.removeListener(overlaycompleteListener)
     }
+
+    setOverlayCompleteListener(
+      google.maps.event.addListener(
+        instance,
+        'overlaycomplete',
+        onOverlayComplete
+      )
+    )
   }, [instance, onOverlayComplete])
 
   useEffect(() => {
-    if (instance && onPolygonComplete) {
-      if (polygoncompleteListener !== null) {
-        google.maps.event.removeListener(polygoncompleteListener)
-      }
+    if (!instance || !onPolygonComplete) return;
 
-      setPolygonCompleteListener(
-        google.maps.event.addListener(
-          instance,
-          'polygoncomplete',
-          onPolygonComplete
-        )
-      )
+    if (polygoncompleteListener !== null) {
+      google.maps.event.removeListener(polygoncompleteListener)
     }
+
+    setPolygonCompleteListener(
+      google.maps.event.addListener(
+        instance,
+        'polygoncomplete',
+        onPolygonComplete
+      )
+    )
   }, [instance, onPolygonComplete])
 
   useEffect(() => {
-    if (instance && onPolylineComplete) {
-      if (polylinecompleteListener !== null) {
-        google.maps.event.removeListener(polylinecompleteListener)
-      }
+    if (!instance || !onPolylineComplete) return;
 
-      setPolylineCompleteListener(
-        google.maps.event.addListener(
-          instance,
-          'polylinecomplete',
-          onPolylineComplete
-        )
-      )
+    if (polylinecompleteListener !== null) {
+      google.maps.event.removeListener(polylinecompleteListener)
     }
+
+    setPolylineCompleteListener(
+      google.maps.event.addListener(
+        instance,
+        'polylinecomplete',
+        onPolylineComplete
+      )
+    )
   }, [instance, onPolylineComplete])
 
   useEffect(() => {
-    if (instance && onRectangleComplete) {
-      if (rectanglecompleteListener !== null) {
-        google.maps.event.removeListener(rectanglecompleteListener)
-      }
+    if (!instance || !onRectangleComplete) return;
 
-      setRectangleCompleteListener(
-        google.maps.event.addListener(
-          instance,
-          'rectanglecomplete',
-          onRectangleComplete
-        )
-      )
+    if (rectanglecompleteListener !== null) {
+      google.maps.event.removeListener(rectanglecompleteListener)
     }
+
+    setRectangleCompleteListener(
+      google.maps.event.addListener(
+        instance,
+        'rectanglecomplete',
+        onRectangleComplete
+      )
+    )
   }, [instance, onRectangleComplete])
 
   useEffect(() => {
