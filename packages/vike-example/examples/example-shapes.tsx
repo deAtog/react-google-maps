@@ -9,7 +9,7 @@ import {
   InfoWindowF,
   OverlayViewF,
   OVERLAY_MOUSE_TARGET,
-} from "@react-google-maps/api";
+} from "@deatog/react-google-maps-api";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

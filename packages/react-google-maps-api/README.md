@@ -1,41 +1,39 @@
-# @react-google-maps/api
+# @deatog/react-google-maps-api
 
-![logo](https://raw.githubusercontent.com/JustFly1984/react-google-maps-api/master/logo.png)
+![logo](https://raw.githubusercontent.com/deAtog/react-google-maps/master/logo.png)
 
-[![npm package](https://img.shields.io/npm/v/@react-google-maps/api)](https://www.npmjs.com/package/@react-google-maps/api)
-[![npm downloads](https://img.shields.io/npm/dt/@react-google-maps/api)](https://www.npmjs.com/package/@react-google-maps/api)
-[![npm bundle size](https://img.shields.io/bundlephobia/min/@react-google-maps/api)](https://www.npmjs.com/package/@react-google-maps/api)
+[![npm package](https://img.shields.io/npm/v/@deatog/react-google-maps-api)](https://www.npmjs.com/package/@deatog/react-google-maps-api)
+[![npm downloads](https://img.shields.io/npm/dt/@deatog/react-google-maps-api)](https://www.npmjs.com/package/@deatog/react-google-maps-api)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/@deatog/react-google-maps-api)](https://www.npmjs.com/package/@deatog/react-google-maps-api)
 
-@react-google-maps/api
-
-You can donate or became a sponsor of the project here: [https://opencollective.com/react-google-maps-api#category-CONTRIBUTE](https://opencollective.com/react-google-maps-api#category-CONTRIBUTE)
+@deatog/react-google-maps-api
 
 > This library requires React v16.6 or later. To use the latest features (including hooks) requires React v16.8+. If you need support for earlier versions of React, you should check out [react-google-maps](https://github.com/tomchentw/react-google-maps)
 > Versions starting 12.20.0 should support React@19.
 
 This is complete re-write of the (sadly unmaintained) `react-google-maps` library. We thank [tomchentw](https://github.com/tomchentw/) for his great work that made possible.
 
-@react-google-maps/api provides very simple bindings to the google maps api and lets you use it in your app as React components.
+@deatog/react-google-maps-api provides very simple bindings to the google maps api and lets you use it in your app as React components.
 
 Here are the main additions to react-google-maps that were the motivation behind this re-write
 
-## Install @react-google-maps/api
+## Install @deatog/react-google-maps-api
 
 with PNPM
 
 ```shell
-pnpm install @react-google-maps/api
+pnpm install @deatog/react-google-maps-api
 ```
 
 with NPM
 
 ```shell
-npm i -S @react-google-maps/api
+npm i -S @deatog/react-google-maps-api
 ```
 
 ```jsx
 import React from 'react'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
+import { GoogleMap, useJsApiLoader } from '@deatog/react-google-maps-api'
 
 const containerStyle = {
   width: '400px',
@@ -125,27 +123,16 @@ If you want to use `window.google` object, you need to extract GoogleMap in sepa
 - Uses the new Context API
 - Supports async React (StrictMode compliant)
 - Removes lodash dependency =>
-  smaller bundle size `12.4kb` gzip, tree-shakeable [https://bundlephobia.com/result?p=@react-google-maps/api](https://bundlephobia.com/result?p=@react-google-maps/api)
+  smaller bundle size `12.4kb` gzip, tree-shakeable [https://bundlephobia.com/result?p=@deatog/react-google-maps-api](https://bundlephobia.com/result?p=@deatog/react-google-maps-api)
 - forbids loading of Roboto fonts, if you set property preventGoogleFonts on `<LoadScript preventGoogleFonts />` component
-
-## Examples
-
-Examples can be found in two places:
-
-1. [Official docs](https://react-google-maps-api-docs.netlify.app/) (powered by [react-styleguidist](https://github.com/styleguidist/react-styleguidist).
-2. A Gatsby app including some examples. See the [examples](https://github.com/JustFly1984/react-google-maps-api/tree/master/packages/react-google-maps-api-gatsby-example/src/examples) folder
 
 ## Advice
 
 > Using the examples requires you to generate a google maps api key. For instructions on how to do that please see the following [guide](https://developers.google.com/maps/documentation/embed/get-api-key)
 
-## Community Help Resource
-
-You can join our [Slack channel](https://join.slack.com/t/react-google-maps-api/shared_invite/enQtODc5ODU1NTY5MzQ4LTBiNTYzZmY1YmVjYzJhZThkMGU0YzUwZjJkNGJmYjk4YjQyYjZhMDk2YThlZGEzNDc0M2RhNjBmMWE4ZTJiMjQ)
-
 ## Contribute
 
-Maintainers and contributors are very welcome! See [this issue](https://github.com/JustFly1984/react-google-maps-api/issues/18) to get started.
+Maintainers and contributors are very welcome! Please submit pull requests via GitHub.
 
 ## How to test changes locally
 

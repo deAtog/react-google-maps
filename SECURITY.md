@@ -13,4 +13,4 @@ latest
 
 ## Reporting a Vulnerability
 
-send me an email to justfly1984@gmail.com
+Send me an email to deatog@gmail.com

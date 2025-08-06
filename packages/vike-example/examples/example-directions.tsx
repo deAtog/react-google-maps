@@ -1,4 +1,4 @@
-import { GoogleMap, DirectionsService, DirectionsRenderer } from "@react-google-maps/api";
+import { GoogleMap, DirectionsService, DirectionsRenderer } from "@deatog/react-google-maps-api";
 import React, { memo, useRef, useMemo, useState, useCallback, type CSSProperties } from "react";
 
 const center: google.maps.LatLngLiteral = {

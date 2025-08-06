@@ -6,7 +6,7 @@ It's the alternative variant of LoadScript and useLoadScript hook that tries to 
 
 ```js static
 import { useCallback } from 'react'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
+import { GoogleMap, useJsApiLoader } from '@deatog/react-google-maps-api'
 
 const options = {
   zoomControlOptions: {

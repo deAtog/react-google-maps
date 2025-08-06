@@ -298,25 +298,25 @@ importers:
         version: 5.6.3
       url-loader:
         specifier: 4.1.1
-        version: 4.1.1(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.23.1))
+        version: 4.1.1(webpack@5.95.0(esbuild@0.25.8))
       webpack:
         specifier: 5.95.0
-        version: 5.95.0(@swc/core@1.7.26)(esbuild@0.23.1)
+        version: 5.95.0(esbuild@0.25.8)
 
   packages/react-google-maps-api:
     dependencies:
+      '@deatog/react-google-maps-infobox':
+        specifier: workspace:*
+        version: link:../react-google-maps-api-infobox
+      '@deatog/react-google-maps-marker-clusterer':
+        specifier: workspace:*
+        version: link:../react-google-maps-api-marker-clusterer
       '@googlemaps/js-api-loader':
         specifier: 1.16.8
         version: 1.16.8
       '@googlemaps/markerclusterer':
         specifier: 2.5.3
         version: 2.5.3
-      '@react-google-maps/infobox':
-        specifier: 2.20.0
-        version: 2.20.0
-      '@react-google-maps/marker-clusterer':
-        specifier: 2.20.0
-        version: 2.20.0
       '@types/google.maps':
         specifier: 3.58.1
         version: 3.58.1
@@ -501,9 +501,9 @@ importers:
 
   packages/vike-example:
     dependencies:
-      '@react-google-maps/api':
-        specifier: 2.19.3
-        version: 2.19.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@deatog/react-google-maps-api':
+        specifier: workspace:*
+        version: link:../react-google-maps-api
       '@sentry/react':
         specifier: 8.33.1
         version: 8.33.1(react@18.3.1)

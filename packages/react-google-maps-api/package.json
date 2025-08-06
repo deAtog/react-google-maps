@@ -1,15 +1,16 @@
 {
-  "name": "@react-google-maps/api",
+  "name": "@deatog/react-google-maps-api",
   "sideEffects": false,
-  "version": "2.20.7",
+  "version": "1.0.0",
   "description": "React.js Google Maps API integration",
   "license": "MIT",
   "author": {
-    "name": "Alexey Lyakhov",
-    "email": "justfly1984@gmail.com",
-    "url": "https://github.com/JustFly1984"
+    "name": "David Ellingsworth",
+    "email": "deAtog@gmail.com",
+    "url": "https://github.com/deAtog"
   },
   "contributors": [
+    "Alexey Lyakhov <justfly1984@gmail.com> (https://github.com/JustFly1984)",
     "Uri Klar <uriklar@gmail.com> (https://github.com/uriklar)",
     "Ignat Awwit <ignatius.awwit@gmail.com> (https://github.com/awwit)",
     "Ivan Konev <ivankonev@gmail.com> (https://github.com/ivankonev)",
@@ -18,13 +19,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/JustFly1984/react-google-maps-api.git",
+    "url": "https://github.com/deAtog/react-google-maps.git",
     "directory": "packages/react-google-maps-api"
   },
   "bugs": {
-    "url": "https://github.com/JustFly1984/react-google-maps-api/issues"
+    "url": "https://github.com/deAtog/react-google-maps/issues"
   },
-  "homepage": "https://react-google-maps-api-docs.netlify.app",
   "publishConfig": {
     "access": "public"
   },
@@ -83,16 +83,11 @@
     "pub:next": "pnpm publish . --tag next",
     "prepublishOnly": "pnpm run build"
   },
-  "resolutions": {
-    "@types/node": "22.7.5",
-    "@types/react": "18.3.11",
-    "@types/react-dom": "18.3.0"
-  },
   "dependencies": {
     "@googlemaps/js-api-loader": "1.16.8",
     "@googlemaps/markerclusterer": "2.5.3",
-    "@react-google-maps/infobox": "2.20.0",
-    "@react-google-maps/marker-clusterer": "2.20.0",
+    "@deatog/react-google-maps-infobox": "workspace:*",
+    "@deatog/react-google-maps-marker-clusterer": "workspace:*",
     "@types/google.maps": "3.58.1",
     "invariant": "2.2.4"
   },

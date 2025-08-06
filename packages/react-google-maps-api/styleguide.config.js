@@ -11,7 +11,7 @@ const propsParser = withCustomConfig('./tsconfig.json', {
 
 function getComponentPathLine(componentPath) {
   const name = basename(componentPath, '.tsx')
-  return `import { ${name} } from '@react-google-maps/api';`
+  return `import { ${name} } from '@deatog/react-google-maps-api';`
 }
 
 const usageMode = 'expand'

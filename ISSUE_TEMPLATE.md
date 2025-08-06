@@ -1,14 +1,8 @@
 # Issue template
 
-You can donate or became a sponsor [https://opencollective.com/react-google-maps-api#category-CONTRIBUTE](https://opencollective.com/react-google-maps-api#category-CONTRIBUTE)
-
-If you want to ask question, please ask it in Github Discussions, [Spectrum.chat](https://spectrum.chat/react-google-maps) or [Slack channel](https://join.slack.com/t/react-google-maps-api/shared_invite/enQtODc5ODU1NTY5MzQ4LTBiNTYzZmY1YmVjYzJhZThkMGU0YzUwZjJkNGJmYjk4YjQyYjZhMDk2YThlZGEzNDc0M2RhNjBmMWE4ZTJiMjQ)
+If you want to ask question, please ask it in Github Discussions.
 
 Please do not post unformatted code into issues, and please do not ask questions. Only real issues, PR's or feature requests are allowed. Minimal reproduction in codesandbox.io is required.
-
-## Help wanted
-As mentioned in [this issue](https://github.com/JustFly1984/react-google-maps-api/issues/3300),
-the author of this project will **only accept issues with codesandbox reproduction and PR with solution** going forward.
 
 ## Please provide an explanation of the issue
 
@@ -24,7 +18,7 @@ webpack version
 
 @babel version
 
-@react-google-maps/api version
+@deatog/react-google-maps-api version
 
 ## How does it behave?
 

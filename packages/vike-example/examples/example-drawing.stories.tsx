@@ -1,5 +1,5 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { DrawingManager as ExampleComponent } from "@react-google-maps/api";
+import { DrawingManager as ExampleComponent } from "@deatog/react-google-maps-api";
 
 import ExampleDrawing from "./example-drawing";
 import { shapeExampleStyles } from "../components/styles";

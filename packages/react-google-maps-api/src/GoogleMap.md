@@ -28,7 +28,7 @@ The GoogleMap component uses React Context internally to pass the map instance a
 
 ```js static
 import React from 'react'
-import { useGoogleMap } from '@react-google-maps/api'
+import { useGoogleMap } from '@deatog/react-google-maps-api'
 
 function PanningComponent() {
   const map = useGoogleMap()

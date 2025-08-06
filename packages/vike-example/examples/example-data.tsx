@@ -1,5 +1,5 @@
 import React, { memo, useMemo, useState, useCallback, type CSSProperties } from "react";
-import { GoogleMap, Data } from "@react-google-maps/api";
+import { GoogleMap, Data } from "@deatog/react-google-maps-api";
 
 const center: google.maps.LatLngLiteral = {
   lat: 38.805470223177466,

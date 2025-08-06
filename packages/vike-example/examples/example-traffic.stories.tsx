@@ -1,6 +1,6 @@
 // eslint-disable-next-line node/no-extraneous-import
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { TrafficLayer as ExampleComponent } from "@react-google-maps/api";
+import { TrafficLayer as ExampleComponent } from "@deatog/react-google-maps-api";
 
 import ExampleTraffic from "./example-traffic";
 import { shapeExampleStyles } from "../components/styles";

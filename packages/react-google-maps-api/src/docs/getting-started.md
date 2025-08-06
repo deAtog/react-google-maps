@@ -1,9 +1,9 @@
-# Install @react-google-maps/api
+# Install @deatog/react-google-maps-api
 
 ```bash
-npm install --save @react-google-maps/api
+npm install --save @deatog/react-google-maps-api
 # or
-pnpm install @react-google-maps/api
+pnpm install @deatog/react-google-maps-api
 ```
 
 ## LoadScript and GoogleMap
@@ -19,7 +19,7 @@ The simplest way to get a functional map is:
 
 ```md
 import React, { Component } from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, LoadScript } from '@deatog/react-google-maps-api';
 
 const containerStyle = {
 width: '400px',
@@ -55,7 +55,7 @@ Or you can also adopt a functional component style:
 
 ```md
 import React from 'react'
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, LoadScript } from '@deatog/react-google-maps-api';
 
 const containerStyle = {
 width: '400px',

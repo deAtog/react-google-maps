@@ -1,5 +1,5 @@
 import React, { type CSSProperties, memo } from "react";
-import { GoogleMap, TransitLayerF } from "@react-google-maps/api";
+import { GoogleMap, TransitLayerF } from "@deatog/react-google-maps-api";
 
 const center: google.maps.LatLngLiteral = {
   lat: 0,

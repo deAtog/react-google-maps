@@ -1,8 +1,8 @@
 {
-  "name": "@react-google-maps/root",
+  "name": "@deatog/react-google-maps",
   "version": "2.9.10",
   "private": true,
-  "description": "@react-google-maps API integration",
+  "description": "React.js Google Maps API integration",
   "license": "MIT",
   "packageManager": "pnpm@9.12.1",
   "engines": {
@@ -10,11 +10,12 @@
     "pnpm": ">=9.12.1"
   },
   "author": {
-    "name": "Alexey Lyakhov",
-    "email": "justfly1984@gmail.com",
-    "url": "https://github.com/JustFly1984"
+    "name": "David Ellingsworth",
+    "email": "deAtog@gmail.com",
+    "url": "https://github.com/deAtog"
   },
   "contributors": [
+    "Alexey Lyakhov <justfly1984@gmail.com> (https://github.com/JustFly1984)",
     "Ignat Awwit <ignatius.awwit@gmail.com> (https://github.com/awwit)",
     "Uri Klar <uriklar@gmail.com> (https://github.com/uriklar)",
     "Ivan Konev <ivankonev@gmail.com> (https://github.com/ivankonev)",
@@ -25,7 +26,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/JustFly1984/react-google-maps-api"
+    "url": "https://github.com/deAtog/react-google-maps.git"
   },
   "scripts": {
     "build:api": "cd packages/react-google-maps-api && pnpm install && pnpm run build && cd ../..",

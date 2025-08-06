@@ -6,7 +6,7 @@ It's the alternative variant of LoadScript that tries to solve the problem of "g
 
 ```js static
 import { useCallback } from 'react'
-import { GoogleMap, useLoadScript } from '@react-google-maps/api'
+import { GoogleMap, useLoadScript } from '@deatog/react-google-maps-api'
 
 const options = {
   zoomControlOptions: {

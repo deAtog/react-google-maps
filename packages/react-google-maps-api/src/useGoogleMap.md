@@ -2,7 +2,7 @@
 
 ```js static
 import { useEffect } from 'react'
-import { GoogleMap, useGoogleMap } from '@react-google-maps/api'
+import { GoogleMap, useGoogleMap } from '@deatog/react-google-maps-api'
 
 function PanningComponent() {
   const map = useGoogleMap()

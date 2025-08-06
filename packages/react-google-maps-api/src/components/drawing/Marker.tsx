@@ -12,7 +12,7 @@ import {
   type ContextType,
   type ReactElement,
 } from 'react'
-import type { Clusterer } from '@react-google-maps/marker-clusterer'
+import type { Clusterer } from '@deatog/react-google-maps-marker-clusterer'
 import type { MarkerClusterer as GoogleClusterer } from '@googlemaps/markerclusterer'
 
 import {

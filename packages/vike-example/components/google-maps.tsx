@@ -2,7 +2,7 @@ import React, { memo, useMemo } from "react";
 import uniqid from "uniqid";
 import { useSelector } from "react-redux";
 
-import { LoadScript } from "@react-google-maps/api";
+import { LoadScript } from "@deatog/react-google-maps-api";
 
 import Card from "./card";
 

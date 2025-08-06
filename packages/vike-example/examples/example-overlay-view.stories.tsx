@@ -1,5 +1,5 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { OverlayViewF } from "@react-google-maps/api";
+import { OverlayViewF } from "@deatog/react-google-maps-api";
 
 import ExampleOverlayView from "./example-overlay-view";
 import { shapeExampleStyles } from "../components/styles";

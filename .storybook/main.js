@@ -118,13 +118,13 @@ module.exports = {
     },
   },
   webpackFinal: (config) => {
-    config.resolve.alias['@react-google-maps/api'] = require.resolve(
+    config.resolve.alias['@deatog/react-google-maps-api'] = require.resolve(
       '../packages/react-google-maps-api/src/index.ts'
     )
-    config.resolve.alias['@react-google-maps/infobox'] = require.resolve(
+    config.resolve.alias['@deatog/react-google-maps-infobox'] = require.resolve(
       '../packages/react-google-maps-api-infobox/src/index.ts'
     )
-    config.resolve.alias['@react-google-maps/marker-clusterer'] =
+    config.resolve.alias['@deatog/react-google-maps-marker-clusterer'] =
       require.resolve(
         '../packages/react-google-maps-api-marker-clusterer/src/index.ts'
       )

@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback, type CSSProperties } from "react";
-import { MarkerF, GoogleMap, OverlayViewF, MARKER_LAYER, OVERLAY_MOUSE_TARGET } from "@react-google-maps/api";
+import { MarkerF, GoogleMap, OverlayViewF, MARKER_LAYER, OVERLAY_MOUSE_TARGET } from "@deatog/react-google-maps-api";
 
 const mapCenter: google.maps.LatLngLiteral = {
   lat: 0,

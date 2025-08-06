@@ -4,7 +4,7 @@
 
 This is complete re-write of the (sadly unmaintained) `react-google-maps` library. We thank [tomchentw](https://github.com/tomchentw/) for his great work that made possible.
 
-[@react-google-maps/api][react-google-maps] provides very simple bindings to the [Google Maps JavaScript API v3][gmjsav3] and lets you use it in your app as React components.
+[@deatog/react-google-maps-api][react-google-maps] provides very simple bindings to the [Google Maps JavaScript API v3][gmjsav3] and lets you use it in your app as React components.
 
 It is written with Typescript and uses types defined in [this](https://www.npmjs.com/package/@types/googlemaps) project
 
@@ -17,7 +17,7 @@ In order to use the examples in these docs **you have to have an api key**. You 
 
 Once you have a key (if it is url restricted, make sure it allows this url), add it in the input and click the Set Key button.
 
-[react-google-maps]: https://github.com/JustFly1984/react-google-maps-api
+[react-google-maps]: https://github.com/deAtog/react-google-maps
 [gmjsav3]: https://developers.google.com/maps/documentation/javascript/
 [react-styleguidist]: https://react-styleguidist.js.org/
 

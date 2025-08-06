@@ -1,5 +1,5 @@
 import React, { type CSSProperties, type JSX, memo } from "react";
-import { GoogleMap, GroundOverlay } from "@react-google-maps/api";
+import { GoogleMap, GroundOverlay } from "@deatog/react-google-maps-api";
 
 const center: google.maps.LatLngLiteral = {
   lat: 40.74,

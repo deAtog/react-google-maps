@@ -1,11 +1,12 @@
 # Contributing
 
-![logo](https://raw.githubusercontent.com/JustFly1984/react-google-maps-api/master/logo.png)
+![logo](https://raw.githubusercontent.com/deAtog/react-google-maps/master/logo.png)
 
 We are welcome to any pull request, which has a clear goal and description. Also please use eslint while developing.
 
 List of contributors:
 
+David Ellingsworth <deatog@gmail.com>
 Alexey Lyakhov <justfly1984@gmail.com>
 Awwit <awwit@gmail.com>
 Ivan Konev <ivankonev@gmail.com>
@@ -17,9 +18,7 @@ Ivan Konev <ivankonev@gmail.com>
 
 Inside root folder you will find packages:
 
-1. @react-google-maps/api
-2. @react-google-maps/infobox
-3. @react-google-maps/marker-clusterer
+1. @deatog/react-google-maps-api
+2. @deatog/react-google-maps-infobox
+3. @deatog/react-google-maps-marker-clusterer
 4. storybook [https://github.com/storybooks/storybook](https://github.com/storybooks/storybook) - for visual testing of our components
-
-You can donate or became a sponsor [https://opencollective.com/react-google-maps-api#category-CONTRIBUTE](https://opencollective.com/react-google-maps-api#category-CONTRIBUTE)

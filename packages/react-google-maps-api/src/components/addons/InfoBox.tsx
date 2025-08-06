@@ -16,7 +16,7 @@ import invariant from 'invariant'
 import {
   InfoBox as GoogleMapsInfoBox,
   type InfoBoxOptions,
-} from '@react-google-maps/infobox'
+} from '@deatog/react-google-maps-infobox'
 
 import {
   unregisterEvents,

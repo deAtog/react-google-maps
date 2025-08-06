@@ -1,5 +1,5 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { HeatmapLayer as ExampleComponent } from "@react-google-maps/api";
+import { HeatmapLayer as ExampleComponent } from "@deatog/react-google-maps-api";
 
 import ExampleHeatmap from "./example-heatmap";
 import { shapeExampleStyles } from "../components/styles";

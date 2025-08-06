@@ -8,7 +8,7 @@ import type {
   ClusterIconInfo,
   ClusterIconStyle,
   MarkerExtended,
-} from '@react-google-maps/marker-clusterer'
+} from '@deatog/react-google-maps-marker-clusterer'
 
 const mapContainerStyle = {
   height: '400px',

@@ -1,27 +1,27 @@
 {
-  "name": "@react-google-maps/infobox",
+  "name": "@deatog/react-google-maps-infobox",
   "sideEffects": false,
-  "version": "2.20.0",
+  "version": "1.0.0",
   "description": "InfoBox for React.js Google Maps API",
   "license": "MIT",
   "type": "module",
   "author": {
-    "name": "Alexey Lyakhov",
-    "email": "justfly1984@gmail.com",
-    "url": "https://github.com/JustFly1984"
+    "name": "David Ellingsworth",
+    "email": "deAtog@gmail.com",
+    "url": "https://github.com/deAtog"
   },
   "contributors": [
+    "Alexey Lyakhov <justfly1984@gmail.com> (https://github.com/JustFly1984)",
     "Kevin Brown <kevin.brown@exogee.com> (https://github.com/thekevinbrown)"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/JustFly1984/react-google-maps-api.git",
+    "url": "https://github.com/deAtog/react-google-maps.git",
     "directory": "packages/react-google-maps-api-infobox"
   },
   "bugs": {
-    "url": "https://github.com/JustFly1984/react-google-maps-api/issues"
+    "url": "https://github.com/deAtog/react-google-maps/issues"
   },
-  "homepage": "https://react-google-maps-api-docs.netlify.app",
   "publishConfig": {
     "access": "public"
   },

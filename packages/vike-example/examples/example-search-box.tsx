@@ -1,5 +1,5 @@
 import React, { type CSSProperties, memo } from "react";
-import { GoogleMap, StandaloneSearchBox } from "@react-google-maps/api";
+import { GoogleMap, StandaloneSearchBox } from "@deatog/react-google-maps-api";
 
 const center: google.maps.LatLngLiteral = {
   lat: 0,

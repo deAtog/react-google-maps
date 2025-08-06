@@ -1,5 +1,5 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-// import { TransitLayer as ExampleShapes} from '@react-google-maps/api'
+// import { TransitLayer as ExampleShapes} from '@deatog/react-google-maps-api'
 
 import ExampleShapes from "./example-shapes";
 import { shapeExampleStyles } from "../components/styles";

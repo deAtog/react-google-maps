@@ -33,7 +33,7 @@ export function makeLoadScriptUrl({
   invariant(
     (googleMapsApiKey && googleMapsClientId) ||
       !(googleMapsApiKey && googleMapsClientId),
-    'You need to specify either googleMapsApiKey or googleMapsClientId for @react-google-maps/api load script to work. You cannot use both at the same time.'
+    'You need to specify either googleMapsApiKey or googleMapsClientId for @deatog/react-google-maps-api load script to work. You cannot use both at the same time.'
   )
 
   if (googleMapsApiKey) {
