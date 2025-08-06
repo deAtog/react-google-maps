@@ -316,30 +316,6 @@ function CircleFunctional({
       map,
     })
 
-    if (typeof radius === 'number') {
-      circle.setRadius(radius)
-    }
-
-    if (typeof center !== 'undefined') {
-      circle.setCenter(center)
-    }
-
-    if (typeof radius === 'number') {
-      circle.setRadius(radius)
-    }
-
-    if (typeof visible !== 'undefined') {
-      circle.setVisible(visible)
-    }
-
-    if (typeof editable !== 'undefined') {
-      circle.setEditable(editable)
-    }
-
-    if (typeof draggable !== 'undefined') {
-      circle.setDraggable(draggable)
-    }
-
     setInstance(circle)
 
     if (onLoad) {
