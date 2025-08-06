@@ -107,40 +107,38 @@ function InfoBoxFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (map && instance !== null) {
-      instance.close()
+    if (!map || instance === null) return;
 
-      if (anchor) {
-        instance.open(map, anchor)
-      } else if (instance.getPosition()) {
-        instance.open(map)
-      }
+    if (anchor) {
+      instance.open(map, anchor)
+    } else if (instance.getPosition()) {
+      instance.open(map)
     }
   }, [map, instance, anchor])
 
   useEffect(() => {
-    if (options && instance !== null) {
-      instance.setOptions(options)
-    }
+    if (!instance || !options) return;
+
+    instance.setOptions(options)
   }, [instance, options])
 
   useEffect(() => {
-    if (position && instance !== null) {
-      const positionLatLng =
-        position instanceof google.maps.LatLng
-          ? position
-          : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            new google.maps.LatLng(position.lat, position.lng)
+    if (!instance || !position) return;
 
-      instance.setPosition(positionLatLng)
-    }
+    const positionLatLng =
+      position instanceof google.maps.LatLng
+        ? position
+        : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          new google.maps.LatLng(position.lat, position.lng)
+
+    instance.setPosition(positionLatLng)
   }, [position])
 
   useEffect(() => {
-    if (typeof zIndex === 'number' && instance !== null) {
-      instance.setZIndex(zIndex)
-    }
+    if (!instance || typeof zIndex !== 'number') return;
+
+    instance.setZIndex(zIndex)
   }, [zIndex])
 
   useEffect(() => {
@@ -187,35 +185,36 @@ function InfoBoxFunctional({
     if (!instance || !onZindexChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'zindex_changed', onZindexChanged);
+
     return () => {
       handler.remove();
     }
   }, [instance, onZindexChanged])
 
   useEffect(() => {
-    if (map) {
-      const { position, ...infoBoxOptions }: InfoBoxOptions =
-        options || defaultOptions
+    if (!map) return;
 
-      let positionLatLng: google.maps.LatLng | undefined
+    const { position, ...infoBoxOptions }: InfoBoxOptions =
+      options || defaultOptions
 
-      if (position && !(position instanceof google.maps.LatLng)) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        positionLatLng = new google.maps.LatLng(position.lat, position.lng)
-      }
+    let positionLatLng: google.maps.LatLng | undefined
 
-      const infoBox = new GoogleMapsInfoBox({
-        ...infoBoxOptions,
-        ...(positionLatLng ? { position: positionLatLng } : {}),
-      })
+    if (position && !(position instanceof google.maps.LatLng)) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      positionLatLng = new google.maps.LatLng(position.lat, position.lng)
+    }
 
-      containerElementRef.current = document.createElement('div')
+    const infoBox = new GoogleMapsInfoBox({
+      ...infoBoxOptions,
+      ...(positionLatLng ? { position: positionLatLng } : {}),
+    })
 
-      setInstance(infoBox)
+    containerElementRef.current = document.createElement('div')
 
+    setInstance(infoBox)
 
-      infoBox.setContent(containerElementRef.current)
+    infoBox.setContent(containerElementRef.current)
 
       if (anchor) {
         infoBox.open(map, anchor)
@@ -228,9 +227,8 @@ function InfoBoxFunctional({
         )
       }
 
-      if (onLoad) {
-        onLoad(infoBox)
-      }
+    if (onLoad) {
+      onLoad(infoBox)
     }
 
     return () => {
