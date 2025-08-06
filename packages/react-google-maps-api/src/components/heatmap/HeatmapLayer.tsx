@@ -93,15 +93,15 @@ function HeatmapLayerFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (instance !== null) {
-      instance.setMap(map)
-    }
+    if (!instance) return;
+
+    instance.setMap(map)
   }, [map])
 
   useEffect(() => {
-    if (options && instance !== null) {
-      instance.setOptions(options)
-    }
+    if (!instance || !options) return;
+
+    instance.setOptions(options)
   }, [instance, options])
 
   useEffect(() => {
