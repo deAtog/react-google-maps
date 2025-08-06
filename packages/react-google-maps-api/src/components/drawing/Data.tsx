@@ -174,12 +174,6 @@ function DataFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (!instance) return;
-
-    instance.setMap(map);
-  }, [map])
-
-  useEffect(() => {
     if (!instance || !onDblClick) return;
 
     const handler = google.maps.event.addListener(instance, 'dblclick', onDblClick);
@@ -310,6 +304,32 @@ function DataFunctional({
   }, [instance, onSetProperty])
 
   useEffect(() => {
+    if (!instance || !map) return;
+
+    if (instance.getMap() !== map) {
+      instance.setMap(map);
+    }
+
+    return () => {
+      instance.setMap(null);
+    }
+  }, [instance, map])
+
+  useEffect(() => {
+    if (!instance || !onLoad) return;
+
+    onLoad(instance);
+  }, [instance, onLoad])
+
+  useEffect(() => {
+    if (!instance || !onUnmount) return;
+
+    return () => {
+      onUnmount(instance);
+    }
+  })
+
+  useEffect(() => {
     if (!map) return;
 
     const data = new google.maps.Data({
@@ -318,21 +338,7 @@ function DataFunctional({
     })
 
     setInstance(data)
-
-    if (onLoad) {
-      onLoad(data)
-    }
-
-    return () => {
-      if (instance) {
-        if (onUnmount) {
-          onUnmount(instance)
-        }
-
-        instance.setMap(null)
-      }
-    }
-  }, [])
+  }, [map])
 
   return null
 }
