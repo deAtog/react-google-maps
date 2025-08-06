@@ -293,22 +293,6 @@ function RectangleFunctional({
       map,
     })
 
-    if (typeof visible !== 'undefined') {
-      rectangle.setVisible(visible)
-    }
-
-    if (typeof editable !== 'undefined') {
-      rectangle.setEditable(editable)
-    }
-
-    if (typeof draggable !== 'undefined') {
-      rectangle.setDraggable(draggable)
-    }
-
-    if (typeof bounds !== 'undefined') {
-      rectangle.setBounds(bounds)
-    }
-
     setInstance(rectangle)
 
     if (onLoad) {
