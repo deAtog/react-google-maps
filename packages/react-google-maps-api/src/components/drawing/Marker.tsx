@@ -249,85 +249,83 @@ function MarkerFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (!instance || !options) return;
+    if (!options) return;
 
     instance.setOptions(options);
   }, [instance, options])
 
   useEffect(() => {
-    if (!instance || draggable === undefined) return;
+    if (draggable === undefined) return;
 
     instance.setDraggable(draggable);
   }, [instance, draggable])
 
   useEffect(() => {
-    if (!instance || !position) return;
+    if (!position) return;
 
     instance.setPosition(position)
   }, [instance, position])
 
   useEffect(() => {
-    if (!instance || visible === undefined) return;
+    if (visible === undefined) return;
 
     instance.setVisible(visible);
   }, [instance, visible])
 
   useEffect(() => {
-    if (!instance) return;
-
     instance.setAnimation(animation);
   }, [instance, animation])
 
   useEffect(() => {
-    if (!instance || clickable === undefined) return;
+    if (clickable === undefined) return;
 
     instance.setClickable(clickable);
   }, [instance, clickable])
 
   useEffect(() => {
-    if (!instance || cursor === undefined) return;
+    if (cursor === undefined) return;
 
     instance.setCursor(cursor);
   }, [instance, cursor])
 
   useEffect(() => {
-    if (!instance || icon === undefined) return;
+    if (icon === undefined) return;
 
     instance.setIcon(icon);
   }, [instance, icon])
 
   useEffect(() => {
-    if (!instance || label === undefined) return;
+    if (label === undefined) return;
 
     instance.setLabel(label);
   }, [instance, label])
 
   useEffect(() => {
-    if (!instance || opacity === undefined) return;
+    if (opacity === undefined) return;
 
     instance.setOpacity(opacity);
   }, [instance, opacity])
 
   useEffect(() => {
-    if (!instance || shape === undefined) return;
+    if (shape === undefined) return;
 
     instance.setShape(shape);
   }, [instance, shape])
 
   useEffect(() => {
-    if (!instance || title === undefined) return;
+    if (title === undefined) return;
 
     instance.setTitle(title);
   }, [instance, title])
 
   useEffect(() => {
-    if (!instance || zIndex === undefined) return;
+    if (zIndex === undefined) return;
 
     instance.setZIndex(zIndex)
   }, [instance, zIndex])
 
   useEffect(() => {
-    if (!instance || !onDblClick) return;
+    if (!onDblClick) return;
 
     const handler = google.maps.event.addListener(instance, 'dblclick', onDblClick);
 
@@ -337,7 +335,7 @@ function MarkerFunctional({
   }, [instance, onDblClick])
 
   useEffect(() => {
-    if (!instance || !onDragEnd) return;
+    if (!onDragEnd) return;
 
     const handler = google.maps.event.addListener(instance, 'dragend', onDragEnd)
 
@@ -347,7 +345,7 @@ function MarkerFunctional({
   }, [instance, onDragEnd])
 
   useEffect(() => {
-    if (!instance || !onDragStart) return;
+    if (!onDragStart) return;
 
     const handler = google.maps.event.addListener(instance, 'dragstart', onDragStart);
 
@@ -357,7 +355,7 @@ function MarkerFunctional({
   }, [instance, onDragStart])
 
   useEffect(() => {
-    if (!instance || !onMouseDown) return;
+    if (!onMouseDown) return;
 
     const handler = google.maps.event.addListener(instance, 'mousedown', onMouseDown);
 
@@ -367,7 +365,7 @@ function MarkerFunctional({
   }, [instance, onMouseDown])
 
   useEffect(() => {
-    if (!instance || !onMouseOut) return;
+    if (!onMouseOut) return;
 
     const handler = google.maps.event.addListener(instance, 'mouseout', onMouseOut);
 
@@ -377,7 +375,7 @@ function MarkerFunctional({
   }, [instance, onMouseOut])
 
   useEffect(() => {
-    if (!instance || !onMouseOver) return;
+    if (!onMouseOver) return;
 
     const handler = google.maps.event.addListener(instance, 'mouseover', onMouseOver);
 
@@ -387,7 +385,7 @@ function MarkerFunctional({
   }, [instance, onMouseOver])
 
   useEffect(() => {
-    if (!instance || !onMouseUp) return;
+    if (!onMouseUp) return;
 
     const handler = google.maps.event.addListener(instance, 'mouseup', onMouseUp);
 
@@ -397,7 +395,7 @@ function MarkerFunctional({
   }, [instance, onMouseUp])
 
   useEffect(() => {
-    if (!instance || !onRightClick) return;
+    if (!onRightClick) return;
 
     const handler = google.maps.event.addListener(instance, 'rightclick', onRightClick);
 
@@ -407,7 +405,7 @@ function MarkerFunctional({
   }, [instance, onRightClick])
 
   useEffect(() => {
-    if (!instance || !onClick) return;
+    if (!onClick) return;
 
     const handler = google.maps.event.addListener(instance, 'click', onClick);
 
@@ -417,7 +415,7 @@ function MarkerFunctional({
   }, [instance, onClick])
 
   useEffect(() => {
-    if (!instance || !onDrag) return;
+    if (!onDrag) return;
 
     const handler = google.maps.event.addListener(instance, 'drag', onDrag);
 
@@ -427,7 +425,7 @@ function MarkerFunctional({
   }, [instance, onDrag])
 
   useEffect(() => {
-    if (!instance || !onClickableChanged) return;
+    if (!onClickableChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'clickable_changed', onClickableChanged);
 
@@ -437,7 +435,7 @@ function MarkerFunctional({
   }, [instance, onClickableChanged])
 
   useEffect(() => {
-    if (!instance || !onCursorChanged) return;
+    if (!onCursorChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'cursor_changed', onCursorChanged);
 
@@ -447,7 +445,7 @@ function MarkerFunctional({
   }, [instance, onCursorChanged])
 
   useEffect(() => {
-    if (!instance || !onAnimationChanged) return;
+    if (!onAnimationChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'animation_changed', onAnimationChanged);
 
@@ -457,7 +455,7 @@ function MarkerFunctional({
   }, [instance, onAnimationChanged])
 
   useEffect(() => {
-    if (!instance || !onDraggableChanged) return;
+    if (!onDraggableChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'draggable_changed', onDraggableChanged);
 
@@ -467,7 +465,7 @@ function MarkerFunctional({
   }, [instance, onDraggableChanged])
 
   useEffect(() => {
-    if (!instance || !onFlatChanged) return;
+    if (!onFlatChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'flat_changed', onFlatChanged);
 
@@ -477,7 +475,7 @@ function MarkerFunctional({
   }, [instance, onFlatChanged])
 
   useEffect(() => {
-    if (!instance || !onIconChanged) return;
+    if (!onIconChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'icon_changed', onIconChanged);
 
@@ -487,7 +485,7 @@ function MarkerFunctional({
   }, [instance, onIconChanged])
 
   useEffect(() => {
-    if (!instance || !onPositionChanged) return;
+    if (!onPositionChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'position_changed', onPositionChanged);
 
@@ -497,7 +495,7 @@ function MarkerFunctional({
   }, [instance, onPositionChanged])
 
   useEffect(() => {
-    if (!instance || !onShapeChanged) return;
+    if (!onShapeChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'shape_changed', onShapeChanged);
 
@@ -507,7 +505,7 @@ function MarkerFunctional({
   }, [instance, onShapeChanged])
 
   useEffect(() => {
-    if (!instance || !onTitleChanged) return;
+    if (!onTitleChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'title_changed', onTitleChanged);
 
@@ -517,7 +515,7 @@ function MarkerFunctional({
   }, [instance, onTitleChanged])
 
   useEffect(() => {
-    if (!instance || !onVisibleChanged) return;
+    if (!onVisibleChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'visible_changed', onVisibleChanged);
 
@@ -527,7 +525,7 @@ function MarkerFunctional({
   }, [instance, onVisibleChanged])
 
   useEffect(() => {
-    if (!instance || !onZindexChanged) return;
+    if (!onZindexChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'zindex_changed', onZindexChanged);
 
@@ -537,8 +535,6 @@ function MarkerFunctional({
   }, [instance, onZindexChanged])
 
   useEffect(() => {
-    if (!instance) return;
-
     if (clusterer) {
       clusterer.addMarker(instance, !!noClustererRedraw)
     } else {
@@ -555,13 +551,13 @@ function MarkerFunctional({
   }, [instance, map, clusterer, noClustererRedraw])
 
   useEffect(() => {
-    if (!instance || !onLoad) return;
+    if (!onLoad) return;
 
     onLoad(instance);
   }, [instance, onLoad])
 
   useEffect(() => {
-    if (!instance || !onUnmount) return;
+    if (!onUnmount) return;
 
     onUnmount(instance);
   }, [instance, onUnmount])
