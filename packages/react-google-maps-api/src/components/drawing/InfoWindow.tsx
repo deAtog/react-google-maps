@@ -100,12 +100,19 @@ function InfoWindowFunctional({
   useEffect(() => {
     if (!instance) return;
 
-    instance.close()
-
     if (anchor) {
       instance.open(map, anchor)
     } else if (instance.getPosition()) {
       instance.open(map)
+    } else {
+      invariant(
+        false,
+        `You must provide either an anchor (typically render it inside a <Marker>) or a position props for <InfoWindow>.`
+      )
+    }
+
+    return () => {
+      instance.close();
     }
   }, [map, instance, anchor])
 
@@ -119,13 +126,13 @@ function InfoWindowFunctional({
     if (!instance || !position) return;
 
     instance.setPosition(position)
-  }, [position])
+  }, [instance, position])
 
   useEffect(() => {
     if (!instance || typeof zIndex !== 'number') return;
 
     instance.setZIndex(zIndex)
-  }, [zIndex])
+  }, [instance, zIndex])
 
   useEffect(() => {
     if (!instance || !onCloseClick) return;
@@ -185,25 +192,6 @@ function InfoWindowFunctional({
     containerElementRef.current = document.createElement('div')
 
     infoWindow.setContent(containerElementRef.current)
-
-    if (position) {
-      infoWindow.setPosition(position)
-    }
-
-    if (zIndex) {
-      infoWindow.setZIndex(zIndex)
-    }
-
-    if (anchor) {
-      infoWindow.open(map, anchor)
-    } else if (infoWindow.getPosition()) {
-      infoWindow.open(map)
-    } else {
-      invariant(
-        false,
-        `You must provide either an anchor (typically render it inside a <Marker>) or a position props for <InfoWindow>.`
-      )
-    }
 
     if (onLoad) {
       onLoad(infoWindow)
