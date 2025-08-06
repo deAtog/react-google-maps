@@ -8,6 +8,7 @@
 
 @deatog/react-google-maps-api
 
+> This library was forked from @react-google-maps/api v2.20.7.
 > This library requires React v16.6 or later. To use the latest features (including hooks) requires React v16.8+. If you need support for earlier versions of React, you should check out [react-google-maps](https://github.com/tomchentw/react-google-maps)
 > Versions starting 12.20.0 should support React@19.
 
@@ -140,8 +141,4 @@ When working on a feature/fix, you're probably gonna want to test your changes. 
 
 1. In the file `packages/react-google-maps-api/package.json` change `main` to `"src/index.ts"`
 2. In the same file, delete the `module` field
-3. You can now use the package `react-google-maps-api-gatsby-example` to test your changes. Just make sure you change the import from `@react-google-maps/api` to `../../../react-google-maps-api`
-
-Since 1.2.0 you can use onLoad and onMount props for each @react-google-maps/api component, ref does not contain API methods anymore.
-
-Since version 1.2.2 We added useGoogleMap hook, which is working only with React@16.8.1 and later versions.
+3. You can now use the package `react-google-maps-api-vike-example` to test your changes.
