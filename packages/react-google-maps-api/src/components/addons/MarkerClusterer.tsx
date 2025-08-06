@@ -330,66 +330,6 @@ function MarkerClustererFunctional(
 
     const clusterer = new Clusterer(map, [], clustererOptions)
 
-    if (averageCenter) {
-      updaterMap.averageCenter(clusterer, averageCenter)
-    }
-
-    if (batchSizeIE) {
-      updaterMap.batchSizeIE(clusterer, batchSizeIE)
-    }
-
-    if (calculator) {
-      updaterMap.calculator(clusterer, calculator)
-    }
-
-    if (clusterClass) {
-      updaterMap.clusterClass(clusterer, clusterClass)
-    }
-
-    if (enableRetinaIcons) {
-      updaterMap.enableRetinaIcons(clusterer, enableRetinaIcons)
-    }
-
-    if (gridSize) {
-      updaterMap.gridSize(clusterer, gridSize)
-    }
-
-    if (ignoreHidden) {
-      updaterMap.ignoreHidden(clusterer, ignoreHidden)
-    }
-
-    if (imageExtension) {
-      updaterMap.imageExtension(clusterer, imageExtension)
-    }
-
-    if (imagePath) {
-      updaterMap.imagePath(clusterer, imagePath)
-    }
-
-    if (imageSizes) {
-      updaterMap.imageSizes(clusterer, imageSizes)
-    }
-
-    if (maxZoom) {
-      updaterMap.maxZoom(clusterer, maxZoom)
-    }
-
-    if (minimumClusterSize) {
-      updaterMap.minimumClusterSize(clusterer, minimumClusterSize)
-    }
-
-    if (styles) {
-      updaterMap.styles(clusterer, styles)
-    }
-
-    if (title) {
-      updaterMap.title(clusterer, title)
-    }
-
-    if (zoomOnClick) {
-      updaterMap.zoomOnClick(clusterer, zoomOnClick)
-    }
-
     setInstance(clusterer)
 
     if (onLoad) {
