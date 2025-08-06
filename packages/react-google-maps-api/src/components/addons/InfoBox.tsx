@@ -109,10 +109,24 @@ function InfoBoxFunctional({
   useEffect(() => {
     if (!map || instance === null) return;
 
+    let isOpen = true;
+
     if (anchor) {
       instance.open(map, anchor)
     } else if (instance.getPosition()) {
       instance.open(map)
+    } else {
+      isOpen = false;
+      invariant(
+        false,
+        'You must provide either an anchor or a position prop for <InfoBox>.'
+      )
+    }
+
+    return () => {
+      if (isOpen) {
+        instance.close();
+      }
     }
   }, [map, instance, anchor])
 
@@ -216,28 +230,13 @@ function InfoBoxFunctional({
 
     infoBox.setContent(containerElementRef.current)
 
-      if (anchor) {
-        infoBox.open(map, anchor)
-      } else if (infoBox.getPosition()) {
-        infoBox.open(map)
-      } else {
-        invariant(
-          false,
-          'You must provide either an anchor or a position prop for <InfoBox>.'
-        )
-      }
-
     if (onLoad) {
       onLoad(infoBox)
     }
 
     return () => {
-      if (instance !== null) {
-        if (onUnmount) {
-          onUnmount(instance)
-        }
-
-        instance.close()
+      if (onUnmount) {
+        onUnmount(infoBox)
       }
     }
   }, [map, onLoad, onUnmount])
