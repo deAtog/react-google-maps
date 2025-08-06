@@ -109,7 +109,7 @@ function DrawingManagerFunctional({
     return () => {
       instance.setMap(null);
     }
-  }, [map])
+  }, [instance, map])
 
   useEffect(() => {
     if (!instance || !options) return;
