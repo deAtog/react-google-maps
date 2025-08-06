@@ -1,8 +1,8 @@
 import {
   memo,
-  useState,
   useEffect,
   useContext,
+  useMemo,
   PureComponent,
   type ContextType,
 } from 'react'
@@ -128,7 +128,12 @@ function RectangleFunctional({
 }: RectangleProps): null {
   const map = useContext<google.maps.Map | null>(MapContext)
 
-  const [instance, setInstance] = useState<google.maps.Rectangle | null>(null)
+  const instance = useMemo(() => {
+    return new google.maps.Rectangle({
+      ...options,
+      map,
+    });
+  }, [])
 
   // Order does matter
   useEffect(() => {
@@ -139,7 +144,7 @@ function RectangleFunctional({
     return () => {
       instance.setMap(null);
     }
-  }, [map])
+  }, [instance, map])
 
   useEffect(() => {
     if (!instance || !options) return;
@@ -304,15 +309,6 @@ function RectangleFunctional({
       onUnmount(instance);
     }
   }, [instance, onUnmount])
-
-  useEffect(() => {
-    const rectangle = new google.maps.Rectangle({
-      ...options,
-      map,
-    })
-
-    setInstance(rectangle)
-  }, [])
 
   return null
 }
