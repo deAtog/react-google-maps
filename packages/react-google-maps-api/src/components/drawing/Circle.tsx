@@ -144,43 +144,43 @@ function CircleFunctional({
 
   // Order does matter
    useEffect(() => {
-    if (typeof options === 'undefined' || !instance) return;
+    if (typeof options === 'undefined') return;
 
     instance.setOptions(options);
   }, [instance, options])
 
   useEffect(() => {
-    if (typeof draggable === 'undefined' || !instance) return;
+    if (typeof draggable === 'undefined') return;
 
     instance.setDraggable(draggable);
   }, [instance, draggable])
 
   useEffect(() => {
-    if (typeof editable === 'undefined' || !instance) return;
+    if (typeof editable === 'undefined') return;
 
     instance.setEditable(editable);
   }, [instance, editable])
 
   useEffect(() => {
-    if (typeof visible === 'undefined' || !instance) return;
+    if (typeof visible === 'undefined') return;
 
     instance.setVisible(visible);
   }, [instance, visible])
 
   useEffect(() => {
-    if (typeof radius !== 'number' || !instance) return;
+    if (typeof radius !== 'number') return;
 
     instance.setRadius(radius);
   }, [instance, radius])
 
   useEffect(() => {
-    if (typeof center === 'undefined' || !instance) return;
+    if (typeof center === 'undefined') return;
 
     instance.setCenter(center);
   }, [instance, center])
 
   useEffect(() => {
-    if (!instance || !onDblClick) return;
+    if (!onDblClick) return;
 
     const handler = google.maps.event.addListener(instance, 'dblclick', onDblClick);
 
@@ -190,7 +190,7 @@ function CircleFunctional({
   }, [instance, onDblClick])
 
   useEffect(() => {
-    if (!instance || !onDragEnd) return;
+    if (!onDragEnd) return;
 
     const handler = google.maps.event.addListener(instance, 'dragend', onDragEnd);
 
@@ -200,7 +200,7 @@ function CircleFunctional({
   }, [instance, onDragEnd])
 
   useEffect(() => {
-    if (!instance || !onDragStart) return;
+    if (!onDragStart) return;
 
     const handler = google.maps.event.addListener(instance, 'dragstart', onDragStart);
 
@@ -210,7 +210,7 @@ function CircleFunctional({
   }, [instance, onDragStart])
 
   useEffect(() => {
-    if (!instance || !onMouseDown) return;
+    if (!onMouseDown) return;
 
     const handler = google.maps.event.addListener(instance, 'mousedown', onMouseDown);
 
@@ -220,7 +220,7 @@ function CircleFunctional({
   }, [instance, onMouseDown])
 
   useEffect(() => {
-    if (!instance || !onMouseMove) return;
+    if (!onMouseMove) return;
 
     const handler = google.maps.event.addListener(instance, 'mousemove', onMouseMove);
 
@@ -230,7 +230,7 @@ function CircleFunctional({
   }, [instance, onMouseMove])
 
   useEffect(() => {
-    if (!instance || !onMouseOut) return;
+    if (!onMouseOut) return;
 
     const handler = google.maps.event.addListener(instance, 'mouseout', onMouseOut);
 
@@ -240,7 +240,7 @@ function CircleFunctional({
   }, [instance, onMouseOut])
 
   useEffect(() => {
-    if (!instance || !onMouseOver) return;
+    if (!onMouseOver) return;
 
     const handler = google.maps.event.addListener(instance, 'mouseover', onMouseOver);
 
@@ -250,7 +250,7 @@ function CircleFunctional({
   }, [instance, onMouseOver])
 
   useEffect(() => {
-    if (!instance || !onMouseUp) return;
+    if (!onMouseUp) return;
 
     const handler = google.maps.event.addListener(instance, 'mouseup', onMouseUp);
 
@@ -260,7 +260,7 @@ function CircleFunctional({
   }, [instance, onMouseUp])
 
   useEffect(() => {
-    if (!instance || !onRightClick) return;
+    if (!onRightClick) return;
 
     const handler = google.maps.event.addListener(instance, 'rightclick', onRightClick);
 
@@ -270,7 +270,7 @@ function CircleFunctional({
   }, [instance, onRightClick])
 
   useEffect(() => {
-    if (!instance || !onClick) return;
+    if (!onClick) return;
 
     const handler = google.maps.event.addListener(instance, 'click', onClick);
 
@@ -280,7 +280,7 @@ function CircleFunctional({
   }, [instance, onClick])
 
   useEffect(() => {
-    if (!instance || !onDrag) return;
+    if (!onDrag) return;
 
     const handler = google.maps.event.addListener(instance, 'drag', onDrag);
 
@@ -290,7 +290,7 @@ function CircleFunctional({
   }, [instance, onDrag])
 
   useEffect(() => {
-    if (!instance || !onCenterChanged) return;
+    if (!onCenterChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'center_changed', onCenterChanged);
 
@@ -300,7 +300,7 @@ function CircleFunctional({
   }, [instance, onClick])
 
   useEffect(() => {
-    if (!instance || !onRadiusChanged) return;
+    if (!onRadiusChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'radius_changed', onRadiusChanged);
 
@@ -310,7 +310,7 @@ function CircleFunctional({
   }, [instance, onRadiusChanged])
 
   useEffect(() => {
-    if (!instance || !map) return;
+    if (!map) return;
 
     instance.setMap(map)
 
@@ -320,13 +320,13 @@ function CircleFunctional({
   }, [instance, map])
 
   useEffect(() => {
-    if (!instance || !onLoad) return;
+    if (!onLoad) return;
 
     onLoad(instance)
   }, [instance, onLoad])
 
   useEffect(() => {
-    if (!instance || !onUnmount) return;
+    if (!onUnmount) return;
 
     return () => {
       onUnmount(instance);
