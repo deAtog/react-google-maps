@@ -549,50 +549,6 @@ function MarkerFunctional({
       marker.setMap(map)
     }
 
-    if (position) {
-      marker.setPosition(position)
-    }
-
-    if (typeof visible !== 'undefined') {
-      marker.setVisible(visible)
-    }
-
-    if (typeof draggable !== 'undefined') {
-      marker.setDraggable(draggable)
-    }
-
-    if (typeof clickable !== 'undefined') {
-      marker.setClickable(clickable)
-    }
-
-    if (typeof cursor === 'string') {
-      marker.setCursor(cursor)
-    }
-
-    if (icon) {
-      marker.setIcon(icon)
-    }
-
-    if (typeof label !== 'undefined') {
-      marker.setLabel(label)
-    }
-
-    if (typeof opacity !== 'undefined') {
-      marker.setOpacity(opacity)
-    }
-
-    if (shape) {
-      marker.setShape(shape)
-    }
-
-    if (typeof title === 'string') {
-      marker.setTitle(title)
-    }
-
-    if (typeof zIndex === 'number') {
-      marker.setZIndex(zIndex)
-    }
-
     setInstance(marker)
 
     if (onLoad) {
