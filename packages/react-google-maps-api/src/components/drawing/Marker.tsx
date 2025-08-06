@@ -237,7 +237,15 @@ function MarkerFunctional({
 }: MarkerProps): JSX.Element | null {
   const map = useContext<google.maps.Map | null>(MapContext)
 
-  const [instance, setInstance] = useState<google.maps.Marker | null>(null)
+  const instance = useMemo(() => {
+    const markerOptions = {
+      ...(options || defaultOptions),
+      ...(clusterer ? defaultOptions : { map }),
+      position,
+    }
+
+    return new google.maps.Marker(markerOptions);
+  }, []);
 
   // Order does matter
   useEffect(() => {
@@ -557,18 +565,6 @@ function MarkerFunctional({
 
     onUnmount(instance);
   }, [instance, onUnmount])
-
-  useEffect(() => {
-    const markerOptions = {
-      ...(options || defaultOptions),
-      ...(clusterer ? defaultOptions : { map }),
-      position,
-    }
-
-    const marker = new google.maps.Marker(markerOptions)
-
-    setInstance(marker)
-  }, [])
 
   const chx = useMemo<ReactNode | null>(() => {
     return children
