@@ -107,30 +107,6 @@ function InfoBoxFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (!map || instance === null) return;
-
-    let isOpen = true;
-
-    if (anchor) {
-      instance.open(map, anchor)
-    } else if (instance.getPosition()) {
-      instance.open(map)
-    } else {
-      isOpen = false;
-      invariant(
-        false,
-        'You must provide either an anchor or a position prop for <InfoBox>.'
-      )
-    }
-
-    return () => {
-      if (isOpen) {
-        instance.close();
-      }
-    }
-  }, [map, instance, anchor])
-
-  useEffect(() => {
     if (!instance || !options) return;
 
     instance.setOptions(options)
@@ -206,8 +182,44 @@ function InfoBoxFunctional({
   }, [instance, onZindexChanged])
 
   useEffect(() => {
-    if (!map) return;
+    if (!map || !instance) return;
 
+    let isOpen = true;
+
+    if (anchor) {
+      instance.open(map, anchor)
+    } else if (instance.getPosition()) {
+      instance.open(map)
+    } else {
+      isOpen = false;
+      invariant(
+        false,
+        'You must provide either an anchor or a position prop for <InfoBox>.'
+      )
+    }
+
+    return () => {
+      if (isOpen) {
+        instance.close();
+      }
+    }
+  }, [map, instance, anchor])
+
+  useEffect(() => {
+    if (!instance || !onLoad) return;
+
+    onLoad(instance);
+  }, [instance, onLoad])
+
+  useEffect(() => {
+    if (!instance || !onUnmount) return;
+
+    return () => {
+      onUnmount(instance);
+    }
+  }, [instance, onUnmount])
+
+  useEffect(() => {
     const { position, ...infoBoxOptions }: InfoBoxOptions =
       options || defaultOptions
 
@@ -229,17 +241,7 @@ function InfoBoxFunctional({
     setInstance(infoBox)
 
     infoBox.setContent(containerElementRef.current)
-
-    if (onLoad) {
-      onLoad(infoBox)
-    }
-
-    return () => {
-      if (onUnmount) {
-        onUnmount(infoBox)
-      }
-    }
-  }, [map, onLoad, onUnmount])
+  }, [])
 
   return containerElementRef.current
     ? createPortal(Children.only(children), containerElementRef.current)
