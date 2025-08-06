@@ -29,6 +29,7 @@
     "url": "https://github.com/deAtog/react-google-maps.git"
   },
   "scripts": {
+    "build": "pnpm install -r && pnpm run -r build",
     "build:api": "cd packages/react-google-maps-api && pnpm install && pnpm run build && cd ../..",
     "build:docs": "cd packages/react-google-maps-api && pnpm install && pnpm run docs:build && cd ../..",
     "build:clusterer": "cd packages/react-google-maps-api-marker-clusterer && pnpm install && pnpm run build && cd ../..",
@@ -38,7 +39,7 @@
     "prebuild:gatsby": "pnpm run build:clusterer && pnpm run build:infobox && pnpm run build:api",
     "start:gatsby": "cd packages/react-google-maps-api-gatsby-example && pnpm run start && cd ../..",
     "prestart:gatsby": "pnpm run build:clusterer && pnpm run build:infobox && pnpm run build:api",
-    "clean": "rimraf ./pnpm-lock.yaml ./package-lock.json ./node_modules/ && pnpm install",
+    "clean": "pnpm run -r clean",
     "storybook": "start-storybook -p 6006",
     "bootstrap": "lerna bootstrap",
     "build-storybook": "build-storybook"

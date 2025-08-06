@@ -73,7 +73,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "rollup --config",
-    "clean": "rimraf ./package-lock.json ./pnpm-lock.yml ./node_modules/ && pnpm install",
+    "clean": "rimraf ./node_modules/ && pnpm install",
     "lint": "pnpx eslint ./src/**/*.{ts,tsx} --fix",
     "docs:dev": "pnpm exec styleguidist server --config ./styleguide.config.js --verbose",
     "docs:build": "pnpm exec styleguidist build --config ./styleguide.config.js --verbose",

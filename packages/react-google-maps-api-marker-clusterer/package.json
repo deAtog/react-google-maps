@@ -44,7 +44,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "rollup --config",
-    "clean": "rimraf ./package-lock.json ./pnpm-lock.yml ./node_modules/ && pnpm install",
+    "clean": "rimraf ./node_modules/ && pnpm install",
     "lint": "pnpx eslint ./src/**/*.{ts,tsx}",
     "pub": "pnpm publish .",
     "tc": "tsc -p ./tsconfig.json --noEmit --traceResolution",
