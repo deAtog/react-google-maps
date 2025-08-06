@@ -10,6 +10,7 @@ import {
   type ReactNode,
   type ReactPortal,
   type ContextType,
+  useMemo,
 } from 'react'
 import invariant from 'invariant'
 import { createPortal } from 'react-dom'
@@ -92,9 +93,15 @@ function InfoWindowFunctional({
 }: InfoWindowProps): ReactPortal | null {
   const map = useContext<google.maps.Map | null>(MapContext)
 
-  const [instance, setInstance] = useState<google.maps.InfoWindow | null>(null)
+  const containerElementRef = useRef<HTMLDivElement | null>(document.createElement('div'));
 
-  const containerElementRef = useRef<HTMLDivElement | null>(null)
+  const instance = useMemo(() => {
+    const infoWindow = new google.maps.InfoWindow(options)
+
+    infoWindow.setContent(containerElementRef.current)
+
+    return infoWindow;
+  }, []);
 
   // Order does matter
   useEffect(() => {
@@ -197,16 +204,6 @@ function InfoWindowFunctional({
       onUnmount(instance);
     }
   })
-
-  useEffect(() => {
-    const infoWindow = new google.maps.InfoWindow(options)
-
-    setInstance(infoWindow)
-
-    containerElementRef.current = document.createElement('div')
-
-    infoWindow.setContent(containerElementRef.current)
-  }, [])
 
   return containerElementRef.current
     ? createPortal(Children.only(children), containerElementRef.current)
