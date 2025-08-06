@@ -325,22 +325,24 @@ function GoogleMapFunctional({
   }, [onClick])
 
   useEffect(() => {
+    if (!map || !onLoad) return;
+
+    onLoad(map);
+  }, [map, onLoad])
+
+  useEffect(() => {
+    if (!map || !onUnmount) return;
+
+    return () => {
+      onUnmount(map);
+    }
+  }, [map, onUnmount])
+
+  useEffect(() => {
     const map =
       ref.current === null ? null : new google.maps.Map(ref.current, options)
 
-    setMap(map)
-
-    if (map !== null && onLoad) {
-      onLoad(map)
-    }
-
-    return () => {
-      if (map !== null) {
-        if (onUnmount) {
-          onUnmount(map)
-        }
-      }
-    }
+    setMap(map);
   }, [])
 
   return (
