@@ -127,13 +127,13 @@ function InfoBoxFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (!instance || !options) return;
+    if (!options) return;
 
     instance.setOptions(options)
   }, [instance, options])
 
   useEffect(() => {
-    if (!instance || !position) return;
+    if (!position) return;
 
     const positionLatLng =
       position instanceof google.maps.LatLng
@@ -146,13 +146,13 @@ function InfoBoxFunctional({
   }, [instance, position])
 
   useEffect(() => {
-    if (!instance || typeof zIndex !== 'number') return;
+    if (typeof zIndex !== 'number') return;
 
     instance.setZIndex(zIndex)
   }, [instance, zIndex])
 
   useEffect(() => {
-    if (!instance || !onCloseClick) return;
+    if (!onCloseClick) return;
 
     const handler = google.maps.event.addListener(instance, 'closeclick', onCloseClick);
 
@@ -162,7 +162,7 @@ function InfoBoxFunctional({
   }, [instance, onCloseClick])
 
   useEffect(() => {
-    if (!instance || !onDomReady) return;
+    if (!onDomReady) return;
 
     const handler = google.maps.event.addListener(instance, 'domready', onDomReady);
 
@@ -172,7 +172,7 @@ function InfoBoxFunctional({
   }, [instance, onDomReady])
 
   useEffect(() => {
-    if (!instance || !onContentChanged) return;
+    if (!onContentChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'content_changed',onContentChanged);
 
@@ -182,7 +182,7 @@ function InfoBoxFunctional({
   }, [instance, onContentChanged])
 
   useEffect(() => {
-    if (!instance || !onPositionChanged) return;
+    if (!onPositionChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'position_changed', onPositionChanged);
 
@@ -192,7 +192,7 @@ function InfoBoxFunctional({
   }, [instance, onPositionChanged])
 
   useEffect(() => {
-    if (!instance || !onZindexChanged) return;
+    if (!onZindexChanged) return;
 
     const handler = google.maps.event.addListener(instance, 'zindex_changed', onZindexChanged);
 
@@ -202,7 +202,7 @@ function InfoBoxFunctional({
   }, [instance, onZindexChanged])
 
   useEffect(() => {
-    if (!map || !instance) return;
+    if (!map) return;
 
     let isOpen = true;
 
@@ -226,13 +226,13 @@ function InfoBoxFunctional({
   }, [map, instance, anchor])
 
   useEffect(() => {
-    if (!instance || !onLoad) return;
+    if (!onLoad) return;
 
     onLoad(instance);
   }, [instance, onLoad])
 
   useEffect(() => {
-    if (!instance || !onUnmount) return;
+    if (!onUnmount) return;
 
     return () => {
       onUnmount(instance);
