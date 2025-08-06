@@ -159,8 +159,6 @@ function PolygonFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (!instance) return;
-
     instance.setMap(map)
 
     return () => {
@@ -169,43 +167,43 @@ function PolygonFunctional({
   }, [instance, map])
 
   useEffect(() => {
-    if (!instance || options === undefined) return;
+    if (options === undefined) return;
 
     instance.setOptions(options)
   }, [instance, options])
 
   useEffect(() => {
-    if (!instance || draggable === undefined) return;
+    if (draggable === undefined) return;
 
     instance.setDraggable(draggable)
   }, [instance, draggable])
 
   useEffect(() => {
-    if (!instance || editable === undefined) return;
+    if (editable === undefined) return;
 
     instance.setEditable(editable)
   }, [instance, editable])
 
   useEffect(() => {
-    if (!instance || visible === undefined) return;
+    if (visible === undefined) return;
 
     instance.setVisible(visible)
   }, [instance, visible])
 
   useEffect(() => {
-    if (!instance || !path) return;
+    if (!path) return;
 
     instance.setPath(path)
   }, [instance, path])
 
   useEffect(() => {
-    if (!instance || !paths) return;
+    if (!paths) return;
 
     instance.setPaths(paths)
   }, [instance, paths])
 
   useEffect(() => {
-    if (!instance || !onDblClick) return;
+    if (!onDblClick) return;
 
     const handler = google.maps.event.addListener(instance, 'dblclick', onDblClick);
 
@@ -215,7 +213,7 @@ function PolygonFunctional({
   }, [instance, onDblClick])
 
   useEffect(() => {
-    if (!instance || !onEdit) return;
+    if (!onEdit) return;
 
     const hInsertAt = google.maps.event.addListener(instance.getPath(), 'insert_at', () => {
       onEdit(instance)
@@ -237,7 +235,7 @@ function PolygonFunctional({
   }, [instance, onEdit])
 
   useEffect(() => {
-    if (!instance || !onDragEnd) return;
+    if (!onDragEnd) return;
 
     const handler = google.maps.event.addListener(instance, 'dragend', onDragEnd);
 
@@ -247,7 +245,7 @@ function PolygonFunctional({
   }, [instance, onDragEnd])
 
   useEffect(() => {
-    if (!instance || !onDragStart) return;
+    if (!onDragStart) return;
 
     const handler = google.maps.event.addListener(instance, 'dragstart', onDragStart);
 
@@ -257,7 +255,7 @@ function PolygonFunctional({
   }, [instance, onDragStart])
 
   useEffect(() => {
-    if (!instance || !onMouseDown) return;
+    if (!onMouseDown) return;
 
     const handler = google.maps.event.addListener(instance, 'mousedown', onMouseDown);
 
@@ -267,7 +265,7 @@ function PolygonFunctional({
   }, [instance, onMouseDown])
 
   useEffect(() => {
-    if (!instance || !onMouseMove) return;
+    if (!onMouseMove) return;
 
     const handler = google.maps.event.addListener(instance, 'mousemove', onMouseMove);
 
@@ -277,7 +275,7 @@ function PolygonFunctional({
   }, [instance, onMouseMove])
 
   useEffect(() => {
-    if (!instance || !onMouseOut) return;
+    if (!onMouseOut) return;
 
     const handler = google.maps.event.addListener(instance, 'mouseout', onMouseOut);
 
@@ -287,7 +285,7 @@ function PolygonFunctional({
   }, [instance, onMouseOut])
 
   useEffect(() => {
-    if (!instance || !onMouseOver) return;
+    if (!onMouseOver) return;
 
     const handler = google.maps.event.addListener(instance, 'mouseover', onMouseOver);
 
@@ -297,7 +295,7 @@ function PolygonFunctional({
   }, [instance, onMouseOver])
 
   useEffect(() => {
-    if (!instance || !onMouseUp) return;
+    if (!onMouseUp) return;
 
     const handler = google.maps.event.addListener(instance, 'mouseup', onMouseUp);
 
@@ -307,7 +305,7 @@ function PolygonFunctional({
   }, [instance, onMouseUp])
 
   useEffect(() => {
-    if (!instance || !onRightClick) return;
+    if (!onRightClick) return;
 
     const handler = google.maps.event.addListener(instance, 'rightclick', onRightClick);
 
@@ -317,7 +315,7 @@ function PolygonFunctional({
   }, [instance, onRightClick])
 
   useEffect(() => {
-    if (!instance || !onClick) return;
+    if (!onClick) return;
 
     const handler = google.maps.event.addListener(instance, 'click', onClick);
 
@@ -327,7 +325,7 @@ function PolygonFunctional({
   }, [instance, onClick])
 
   useEffect(() => {
-    if (!instance || !onDrag) return;
+    if (!onDrag) return;
 
     const handler = google.maps.event.addListener(instance, 'drag', onDrag);
 
@@ -337,13 +335,13 @@ function PolygonFunctional({
   }, [instance, onDrag])
 
   useEffect(() => {
-    if (!instance || !onLoad) return;
+    if (!onLoad) return;
 
     onLoad(instance);
   }, [instance, onLoad]);
 
   useEffect(() => {
-    if (!instance || !onUnmount) return;
+    if (!onUnmount) return;
 
     return () => {
       onUnmount(instance);
