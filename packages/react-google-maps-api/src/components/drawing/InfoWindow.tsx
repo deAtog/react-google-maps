@@ -93,7 +93,7 @@ function InfoWindowFunctional({
 }: InfoWindowProps): ReactPortal | null {
   const map = useContext<google.maps.Map | null>(MapContext)
 
-  const containerElementRef = useRef<HTMLDivElement | null>(document.createElement('div'));
+  const containerElementRef = useRef<HTMLDivElement>(document.createElement('div'));
 
   const instance = useMemo(() => {
     const infoWindow = new google.maps.InfoWindow(options)
