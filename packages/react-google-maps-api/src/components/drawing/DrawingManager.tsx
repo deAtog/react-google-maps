@@ -102,7 +102,7 @@ function DrawingManagerFunctional({
 
   // Order does matter
   useEffect(() => {
-    if (!instance || !map) return;
+    if (!map) return;
 
     instance.setMap(map);
 
@@ -112,19 +112,17 @@ function DrawingManagerFunctional({
   }, [instance, map])
 
   useEffect(() => {
-    if (!instance || !options) return;
+    if (!options) return;
 
     instance.setOptions(options);
   }, [instance, options])
 
   useEffect(() => {
-    if (!instance) return;
-
     instance.setDrawingMode(drawingMode ?? null);
   }, [instance, drawingMode])
 
   useEffect(() => {
-    if (!instance || !onCircleComplete) return;
+    if (!onCircleComplete) return;
 
     const handler = google.maps.event.addListener(instance, 'circlecomplete', onCircleComplete);
 
@@ -134,7 +132,7 @@ function DrawingManagerFunctional({
   }, [instance, onCircleComplete])
 
   useEffect(() => {
-    if (!instance || !onMarkerComplete) return;
+    if (!onMarkerComplete) return;
 
     const handler = google.maps.event.addListener(instance, 'markercomplete', onMarkerComplete);
 
@@ -144,7 +142,7 @@ function DrawingManagerFunctional({
   }, [instance, onMarkerComplete])
 
   useEffect(() => {
-    if (!instance || !onOverlayComplete) return;
+    if (!onOverlayComplete) return;
 
     const handler = google.maps.event.addListener(instance, 'overlaycomplete', onOverlayComplete);
 
@@ -154,7 +152,7 @@ function DrawingManagerFunctional({
   }, [instance, onOverlayComplete])
 
   useEffect(() => {
-    if (!instance || !onPolygonComplete) return;
+    if (!onPolygonComplete) return;
 
     const handler = google.maps.event.addListener(instance, 'polygoncomplete', onPolygonComplete);
 
@@ -164,7 +162,7 @@ function DrawingManagerFunctional({
   }, [instance, onPolygonComplete])
 
   useEffect(() => {
-    if (!instance || !onPolylineComplete) return;
+    if (!onPolylineComplete) return;
 
     const handler = google.maps.event.addListener(instance, 'polylinecomplete', onPolylineComplete);
 
@@ -174,7 +172,7 @@ function DrawingManagerFunctional({
   }, [instance, onPolylineComplete])
 
   useEffect(() => {
-    if (!instance || !onRectangleComplete) return;
+    if (!onRectangleComplete) return;
 
     const handler = google.maps.event.addListener(instance, 'rectanglecomplete', onRectangleComplete);
 
@@ -184,13 +182,13 @@ function DrawingManagerFunctional({
   }, [instance, onRectangleComplete])
 
   useEffect(() => {
-    if (!instance || !onLoad) return;
+    if (!onLoad) return;
 
     onLoad(instance);
   }, [instance, onLoad])
 
   useEffect(() => {
-    if (!instance || !onUnmount) return;
+    if (!onUnmount) return;
 
     return () => {
       onUnmount(instance);
