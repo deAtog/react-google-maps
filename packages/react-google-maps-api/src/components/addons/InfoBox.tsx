@@ -204,14 +204,11 @@ function InfoBoxFunctional({
   useEffect(() => {
     if (!map) return;
 
-    let isOpen = true;
-
     if (anchor) {
       instance.open(map, anchor)
     } else if (instance.getPosition()) {
       instance.open(map)
     } else {
-      isOpen = false;
       invariant(
         false,
         'You must provide either an anchor or a position prop for <InfoBox>.'
@@ -219,9 +216,7 @@ function InfoBoxFunctional({
     }
 
     return () => {
-      if (isOpen) {
-        instance.close();
-      }
+      instance.close();
     }
   }, [map, instance, anchor])
 
