@@ -47,6 +47,11 @@ export {
 } from './components/drawing/Marker.js'
 
 export {
+  PinF,
+  type PinProps,
+} from './components/drawing/Pin.js'
+
+export {
   default as MarkerClusterer,
   MarkerClustererF,
   type MarkerClustererProps,
