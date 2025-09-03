@@ -30,6 +30,11 @@ export {
 } from './components/maps/TransitLayer.js'
 
 export {
+  AdvancedMarkerF,
+  type AdvancedMarkerProps,
+ } from './components/drawing/AdvancedMarker.js'
+
+export {
   default as DrawingManager,
   DrawingManagerF,
   type DrawingManagerProps,
