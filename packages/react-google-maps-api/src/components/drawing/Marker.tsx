@@ -558,7 +558,9 @@ function MarkerFunctional({
   useEffect(() => {
     if (!onUnmount) return;
 
-    onUnmount(instance);
+    return () => {
+      onUnmount(instance);
+    }
   }, [instance, onUnmount])
 
   const chx = useMemo<ReactNode | null>(() => {
