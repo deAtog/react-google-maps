@@ -30,6 +30,7 @@ export {
 } from './components/maps/TransitLayer.js'
 
 export {
+  default as AdvancedMarker,
   AdvancedMarkerF,
   type AdvancedMarkerProps,
  } from './components/drawing/AdvancedMarker.js'
