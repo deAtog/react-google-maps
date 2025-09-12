@@ -1,6 +1,8 @@
-import React, { useContext, type JSX, useMemo, type ReactNode, useEffect, Children, memo } from 'react';
+import React, { useContext, type JSX, useMemo, type ReactNode, useEffect, Children, memo, PureComponent, type ContextType, isValidElement, type ReactElement, cloneElement } from 'react';
 import { createPortal } from 'react-dom';
 import MapContext from '../../map-context';
+import { applyUpdatersToPropsAndRegisterEvents, unregisterEvents } from '../../utils/helper';
+import { type HasMarkerAnchor } from '../../types';
 
 export type AdvancedMarkerProps = {
     children?: ReactNode | undefined,
@@ -35,6 +37,51 @@ export type AdvancedMarkerProps = {
     onLoad?: ((marker: google.maps.marker.AdvancedMarkerElement) => void) | undefined,
     /** This callback is called when the component unmounts. It is called with the advanced marker instance. */
     onUnmount?: ((marker: google.maps.marker.AdvancedMarkerElement) => void) | undefined,
+}
+const eventMap = {
+    onClick: 'click',
+    onDrag: 'drag',
+    onDragEnd: 'dragend',
+    onDragStart: 'dragstart'
+}
+
+const updaterMap = {
+    collisionBehavior(
+        instance:google.maps.marker.AdvancedMarkerElement,
+        collisionBehavior: google.maps.CollisionBehavior
+    ): void {
+        instance.collisionBehavior = collisionBehavior ?? null;
+    },
+    clickable(
+        instance:google.maps.marker.AdvancedMarkerElement,
+        clickable:boolean | undefined
+    ): void {
+        instance.gmpClickable = clickable ?? null;
+    },
+    draggable(
+        instance:google.maps.marker.AdvancedMarkerElement,
+        draggable:boolean | undefined
+    ): void {
+        instance.gmpDraggable = draggable ?? null;
+    },
+    position(
+        instance:google.maps.marker.AdvancedMarkerElement,
+        position: google.maps.LatLng | google.maps.LatLngLiteral | google.maps.LatLngAltitude | google.maps.LatLngAltitudeLiteral | undefined
+    ): void {
+        instance.position = position ?? null;
+    },
+    title(
+        instance:google.maps.marker.AdvancedMarkerElement,
+        title: string | undefined
+    ): void {
+        instance.title = title ?? '';
+    },
+    zIndex(
+        instance:google.maps.marker.AdvancedMarkerElement,
+        zIndex:number | undefined
+    ): void {
+        instance.zIndex = zIndex ?? null;
+    }
 }
 
 export const AdvancedMarkerContext = React.createContext<google.maps.marker.AdvancedMarkerElement | null>(null);
@@ -179,11 +226,146 @@ function AdvancedMarkerFunctional({
         instance.map = map;
     }, [instance, map])
 
+    const chx: ReactNode | null = children
+        ? Children.map(children, (child) => {
+            if (!isValidElement<HasMarkerAnchor>(child)) {
+                return child;
+            }
+
+            const childElement: ReactElement<HasMarkerAnchor> = child;
+
+            return cloneElement(childElement, {anchor: instance});
+        })
+        : null;
+
     return (
         <AdvancedMarkerContext.Provider value={instance}>
-            {createPortal(Children.only(children), content)}
+            {createPortal(chx, content)}
         </AdvancedMarkerContext.Provider>
     );
 }
 
 export const AdvancedMarkerF = memo(AdvancedMarkerFunctional);
+
+export class AdvancedMarker extends PureComponent<AdvancedMarkerProps> {
+    static override contextType = MapContext
+    declare context: ContextType<typeof MapContext>
+
+    marker: google.maps.marker.AdvancedMarkerElement | undefined
+    content: DocumentFragment = document.createDocumentFragment();
+
+    registeredEvents: google.maps.MapsEventListener[] = [];
+
+    override async componentDidMount(): Promise<void> {
+        const {
+            collisionBehavior,
+            clickable,
+            draggable,
+            position,
+            title,
+            zIndex,
+            onLoad,
+            onRightClick,
+        } = this.props;
+
+        const options: google.maps.marker.AdvancedMarkerElementOptions = {
+            collisionBehavior: collisionBehavior ?? null,
+            gmpClickable: clickable ?? null,
+            gmpDraggable: draggable ?? null,
+            position: position ?? null,
+            title: title ?? null,
+            zIndex: zIndex ?? null,
+            map: this.context,
+            content: this.content,
+        };
+
+        this.marker = new google.maps.marker.AdvancedMarkerElement(options);
+
+        this.registeredEvents = applyUpdatersToPropsAndRegisterEvents({
+            updaterMap,
+            eventMap,
+            prevProps: {},
+            nextProps: this.props,
+            instance: this.marker,
+        });
+
+        if (onRightClick) {
+            this.marker.addEventListener('contextmenu', onRightClick);
+        }
+
+        if (onLoad) {
+            onLoad(this.marker);
+        }
+    }
+
+    override componentDidUpdate(prevProps: Readonly<AdvancedMarkerProps>): void {
+        if (!this.marker) {
+            return;
+        }
+
+        unregisterEvents(this.registeredEvents);
+
+        if (prevProps.onRightClick !== this.props.onRightClick) {
+            if (prevProps.onRightClick) {
+                this.marker.removeEventListener('contextmenu', prevProps.onRightClick);
+            }
+
+            if (this.props.onRightClick) {
+                this.marker.addEventListener('contextmenu', this.props.onRightClick);
+            }
+        }
+
+        this.registeredEvents = applyUpdatersToPropsAndRegisterEvents({
+            updaterMap,
+            eventMap,
+            prevProps,
+            nextProps: this.props,
+            instance: this.marker,
+        });
+    }
+
+    override componentWillUnmount(): void {
+        if (!this.marker) {
+            return;
+        }
+
+        const {
+            onUnmount,
+            onRightClick
+        } = this.props;
+
+        if (onUnmount) {
+            onUnmount(this.marker);
+        }
+
+        unregisterEvents(this.registeredEvents);
+
+        if (onRightClick) {
+            this.marker.removeEventListener('contextmenu', onRightClick);
+        }
+
+        this.marker.map = null;
+    }
+
+    override render(): ReactNode {
+        const children: ReactNode | null = this.props.children
+            ? Children.map(this.props.children, (child) => {
+                if (!isValidElement<HasMarkerAnchor>(child)) {
+                    return child;
+                }
+
+                const childElement: ReactElement<HasMarkerAnchor> = child;
+
+                return cloneElement(childElement, { anchor: this.marker });
+            })
+            : null;
+
+        return (
+            <AdvancedMarkerContext.Provider value={this.marker ?? null}>
+                {createPortal(children, this.content)}
+            </AdvancedMarkerContext.Provider>
+        );
+    }
+}
+
+export default AdvancedMarker;
