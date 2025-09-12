@@ -1,5 +1,5 @@
 export type HasMarkerAnchor = {
-  anchor?: google.maps.Marker | null | undefined
+  anchor?: google.maps.Marker | google.maps.marker.AdvancedMarkerElement | null | undefined
 }
 
 export type PositionDrawProps = {
