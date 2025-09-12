@@ -48,6 +48,7 @@ export {
 } from './components/drawing/Marker.js'
 
 export {
+  default as Pin,
   PinF,
   type PinProps,
 } from './components/drawing/Pin.js'
