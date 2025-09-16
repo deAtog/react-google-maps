@@ -207,6 +207,16 @@ function AdvancedMarkerFunctional({
     }, [instance, onDragStart])
 
     useEffect(() => {
+        if (typeof map === 'undefined') return;
+
+        instance.map = map;
+
+        return () => {
+            instance.map = null;
+        }
+    }, [instance, map])
+
+    useEffect(() => {
         if (!onLoad) return;
 
         onLoad(instance);
@@ -219,12 +229,6 @@ function AdvancedMarkerFunctional({
             onUnmount(instance);
         }
     }, [instance, onUnmount])
-
-    useEffect(() => {
-        if (typeof map === 'undefined') return;
-
-        instance.map = map;
-    }, [instance, map])
 
     const chx: ReactNode | null = children
         ? Children.map(children, (child) => {
