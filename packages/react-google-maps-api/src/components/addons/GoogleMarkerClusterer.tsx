@@ -1,4 +1,4 @@
-import { useState, useEffect, memo, type ReactElement } from 'react'
+import { useEffect, memo, type ReactElement, useMemo } from 'react'
 import {
   MarkerClusterer,
   type MarkerClustererOptions,
@@ -29,25 +29,10 @@ export type GoogleMarkerClustererProps = {
    * ```
    */
   options: MarkerClustererOptionsSubset
-}
-
-export function useGoogleMarkerClusterer(
-  options: MarkerClustererOptionsSubset
-): MarkerClusterer | null {
-  const map = useGoogleMap()
-
-  const [markerClusterer, setMarkerClusterer] =
-    useState<MarkerClusterer | null>(null)
-
-  useEffect(() => {
-    if (map && markerClusterer === null) {
-      const markerCluster = new MarkerClusterer({ ...options, map })
-
-      setMarkerClusterer(markerCluster)
-    }
-  }, [map])
-
-  return markerClusterer
+    /** This callback is called when the clusterer instance has loaded. It is called with the clusterer instance. */
+  onLoad?: ((clusterer:MarkerClusterer) => void) | undefined
+    /** This callback is called when the component unmounts. It is called with the clusterer instance. */
+  onUnload?: ((clusterer:MarkerClusterer) => void) | undefined
 }
 
 /** Wrapper around [@googlemaps/markerclusterer](https://github.com/googlemaps/js-markerclusterer)
@@ -57,10 +42,45 @@ export function useGoogleMarkerClusterer(
 function GoogleMarkerClusterer({
   children,
   options,
+  onLoad,
+  onUnload,
 }: GoogleMarkerClustererProps) {
-  const markerClusterer = useGoogleMarkerClusterer(options)
+  const map = useGoogleMap();
 
-  return markerClusterer !== null ? children(markerClusterer) : null
+  const instance = useMemo(() => {
+    return new MarkerClusterer({...options, map});
+  }, []);
+
+  useEffect(() => {
+    instance.setMap(map);
+
+    return () => {
+      instance.setMap(null);
+    }
+  }, [map])
+
+  useEffect(() => {
+    if (!onLoad) return;
+
+    onLoad(instance);
+  }, [instance, onLoad]);
+
+  useEffect(() => {
+    if (!onUnload) return;
+
+    return () => {
+      onUnload(instance);
+    }
+  }, [instance, onUnload]);
+
+  const content = useMemo(() => {
+    if (!map) return;
+    if (typeof children !== 'function') return;
+
+    return children(instance);
+  }, [instance, children])
+
+  return content;
 }
 
 export default memo(GoogleMarkerClusterer)
