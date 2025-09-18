@@ -248,8 +248,14 @@ export class Clusterer implements google.maps.OverlayView {
     while (!entry.done) {
       const marker = entry.value;
 
-      if (marker.getMap() !== this.activeMap) {
-        marker.setMap(this.activeMap);
+      if (marker instanceof google.maps.Marker) {
+        if (marker.getMap() !== this.activeMap) {
+          marker.setMap(this.activeMap);
+        }
+      } else if (this.activeMap instanceof google.maps.Map) {
+        if (marker.map !== this.activeMap) {
+          marker.map = this.activeMap;
+        }
       }
 
       entry = iterator.next();
@@ -333,7 +339,9 @@ export class Clusterer implements google.maps.OverlayView {
 
     while (!entry.done) {
       const marker = entry.value;
-      const position = marker.getPosition();
+      const position = (marker instanceof google.maps.Marker)
+        ? marker.getPosition()
+        : marker.position;
 
       if (position) {
         bounds.extend(position)
@@ -512,7 +520,11 @@ export class Clusterer implements google.maps.OverlayView {
 
   pushMarkerTo(marker: MarkerExtended) {
     // If the marker is draggable add a listener so we can update the clusters on the dragend:
-    if (marker.getDraggable()) {
+    const draggable = (marker instanceof google.maps.Marker)
+      ? marker.getDraggable()
+      : marker.draggable;
+
+    if (draggable) {
       google.maps.event.addListener(marker, 'dragend', () => {
         if (this.ready) {
           marker.isAdded = false
@@ -533,7 +545,11 @@ export class Clusterer implements google.maps.OverlayView {
       return false
     }
 
-    marker.setMap(null)
+    if (marker instanceof google.maps.Marker) {
+      marker.setMap(null)
+    } else {
+      marker.map = null;
+    }
 
     return true
   }
@@ -659,7 +675,11 @@ export class Clusterer implements google.maps.OverlayView {
       marker.isAdded = false
 
       if (optHide) {
-        marker.setMap(null)
+        if (marker instanceof google.maps.Marker) {
+          marker.setMap(null)
+        } else {
+          marker.map = null;
+        }
       }
 
       entry = iterator.next();
@@ -683,7 +703,9 @@ export class Clusterer implements google.maps.OverlayView {
   }
 
   isMarkerInBounds(marker: MarkerExtended, bounds: google.maps.LatLngBounds): boolean {
-    const position = marker.getPosition()
+    const position = (marker instanceof google.maps.Marker)
+      ? marker.getPosition()
+      : marker.position;
 
     if (position) {
       return bounds.contains(position)
@@ -704,10 +726,13 @@ export class Clusterer implements google.maps.OverlayView {
 
       const center = cluster.getCenter()
 
-      const position = marker.getPosition()
+      const position = (marker instanceof google.maps.Marker)
+        ? marker.getPosition()
+        : marker.position;
 
       if (center && position) {
-        const d = this.distanceBetweenPoints(center, position)
+        const latlng = new google.maps.LatLng(position);
+        const d = this.distanceBetweenPoints(center, latlng)
 
         if (d < distance) {
           distance = d
@@ -782,8 +807,14 @@ export class Clusterer implements google.maps.OverlayView {
     while (!entry.done && i < this.batchSize) {
       const marker = entry.value;
 
-      if (marker && !marker.isAdded && this.isMarkerInBounds(marker, extendedMapBounds) && (!this.ignoreHidden || (this.ignoreHidden && marker.getVisible()))) {
-        this.addToClosestCluster(marker)
+      if (marker && !marker.isAdded && this.isMarkerInBounds(marker, extendedMapBounds)) {
+        const isVisible = (marker instanceof google.maps.Marker)
+          ? marker.getVisible()
+          : marker.checkVisibility();
+
+        if (this.ignoreHidden || (this.ignoreHidden && isVisible)) {
+          this.addToClosestCluster(marker)
+        }
       }
 
       entry = iterator.next();

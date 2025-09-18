@@ -78,7 +78,7 @@ function GoogleMarkerClusterer({
     if (typeof children !== 'function') return;
 
     return children(instance);
-  }, [instance, children])
+  }, [instance, children]);
 
   return content;
 }

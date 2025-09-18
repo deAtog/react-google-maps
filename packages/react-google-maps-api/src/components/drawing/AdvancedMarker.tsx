@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom';
 import MapContext from '../../map-context';
 import { applyUpdatersToPropsAndRegisterEvents, unregisterEvents } from '../../utils/helper';
 import { type HasMarkerAnchor } from '../../types';
+import type { Clusterer } from '@deatog/react-google-maps-marker-clusterer';
+import type { MarkerClusterer as GoogleClusterer } from '@googlemaps/markerclusterer'
 
 export type AdvancedMarkerProps = {
     children?: ReactNode | undefined,
@@ -23,6 +25,10 @@ export type AdvancedMarkerProps = {
     title?: string | undefined,
     /** All advanced markers are displayed on the map in order of their zIndex, with higher values displaying in front of advanced markers with lower values. By default, advanced markers are displayed according to their vertical position on the screen, with lower advanced markers appearing in front of advanced markers farther up the screen. Note that zIndex is also used to help determine relative priority between CollisionBehavior.OPTIONAL_AND_HIDES_LOWER_PRIORITY advanced markers. A higher zIndex value indicates higher priority. */
     zIndex?: number | undefined,
+    /** Render prop that handles clustering markers */
+    clusterer?: Clusterer | GoogleClusterer | undefined
+    /** Clusters are redrawn when a Marker is added unless noClustererRedraw? is set to true. */
+    noClustererRedraw?: boolean | undefined
     /** This event is fired when the advanced marker element is clicked and clickable is true. */
     onClick?: ((e: google.maps.MapMouseEvent) => void) | undefined,
     /** This event is fires when the advanced marker element is right clicked and clickable is true. */
@@ -90,6 +96,8 @@ function AdvancedMarkerFunctional({
     children,
     collisionBehavior,
     clickable,
+    clusterer,
+    noClustererRedraw,
     draggable,
     position,
     title,
@@ -207,12 +215,18 @@ function AdvancedMarkerFunctional({
     }, [instance, onDragStart])
 
     useEffect(() => {
-        if (typeof map === 'undefined') return;
-
-        instance.map = map;
+        if (clusterer) {
+            clusterer.addMarker(instance, !!noClustererRedraw);
+        } else {
+            instance.map = map;
+        }
 
         return () => {
-            instance.map = null;
+            if (clusterer) {
+                clusterer.removeMarker(instance, !!noClustererRedraw);
+            } else {
+                instance.map = null;
+            }
         }
     }, [instance, map])
 
@@ -264,6 +278,8 @@ export class AdvancedMarker extends PureComponent<AdvancedMarkerProps> {
         const {
             collisionBehavior,
             clickable,
+            clusterer,
+            noClustererRedraw,
             draggable,
             position,
             title,
@@ -279,7 +295,6 @@ export class AdvancedMarker extends PureComponent<AdvancedMarkerProps> {
             position: position ?? null,
             title: title ?? null,
             zIndex: zIndex ?? null,
-            map: this.context,
             content: this.content,
         };
 
@@ -292,6 +307,12 @@ export class AdvancedMarker extends PureComponent<AdvancedMarkerProps> {
             nextProps: this.props,
             instance: this.marker,
         });
+
+        if (clusterer) {
+            clusterer.addMarker(this.marker, !!noClustererRedraw);
+        } else {
+            this.marker.map = this.context;
+        }
 
         if (onRightClick) {
             this.marker.addEventListener('contextmenu', onRightClick);
@@ -334,6 +355,8 @@ export class AdvancedMarker extends PureComponent<AdvancedMarkerProps> {
         }
 
         const {
+            clusterer,
+            noClustererRedraw,
             onUnmount,
             onRightClick
         } = this.props;
@@ -348,7 +371,11 @@ export class AdvancedMarker extends PureComponent<AdvancedMarkerProps> {
             this.marker.removeEventListener('contextmenu', onRightClick);
         }
 
-        this.marker.map = null;
+        if (clusterer) {
+            clusterer.removeMarker(this.marker, !!noClustererRedraw);
+        } else {
+            this.marker.map = null;
+        }
     }
 
     override render(): ReactNode {

@@ -6,7 +6,7 @@ export type ClusterIconInfo = {
   html?: string | undefined
 }
 
-export type MarkerExtended = google.maps.Marker & {
+export type MarkerExtended = (google.maps.Marker | google.maps.marker.AdvancedMarkerElement) & {
   isAdded?: boolean | undefined
 }
 

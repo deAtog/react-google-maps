@@ -44,6 +44,8 @@ export class Cluster {
     this.getBounds = this.getBounds.bind(this)
     this.remove = this.remove.bind(this)
     this.addMarker = this.addMarker.bind(this)
+    this.showMarker = this.showMarker.bind(this)
+    this.hideMarker = this.hideMarker.bind(this)
     this.isMarkerInClusterBounds = this.isMarkerInClusterBounds.bind(this)
     this.calculateBounds = this.calculateBounds.bind(this)
     this.updateIcon = this.updateIcon.bind(this)
@@ -76,7 +78,9 @@ export class Cluster {
     const markers = this.getMarkers()
 
     for (const marker of markers) {
-      const position = marker.getPosition()
+      const position = (marker instanceof google.maps.Marker)
+        ? marker.getPosition()
+        : marker.position;
 
       if (position) {
         bounds.extend(position)
@@ -102,23 +106,28 @@ export class Cluster {
     }
 
     if (!this.center) {
-      const position = marker.getPosition()
+      const position = (marker instanceof google.maps.Marker)
+        ? marker.getPosition()
+        : marker.position;
 
       if (position) {
-        this.center = position
+        this.center = new google.maps.LatLng(position);
 
         this.calculateBounds()
       }
     } else {
       if (this.averageCenter) {
-        const position = marker.getPosition()
+        const position = (marker instanceof google.maps.Marker)
+          ? marker.getPosition()
+          : marker.position;
 
         if (position) {
           const length = this.markers.length + 1
+          const latlng = new google.maps.LatLng(position);
 
           this.center = new google.maps.LatLng(
-            (this.center.lat() * (length - 1) + position.lat()) / length,
-            (this.center.lng() * (length - 1) + position.lng()) / length
+            (this.center.lat() * (length - 1) + latlng.lat()) / length,
+            (this.center.lng() * (length - 1) + latlng.lng()) / length
           )
 
           this.calculateBounds()
@@ -138,29 +147,47 @@ export class Cluster {
 
     if (maxZoom !== null && typeof zoom !== 'undefined' && zoom > maxZoom) {
       // Zoomed in past max zoom, so show the marker.
-      if (marker.getMap() !== this.map) {
-        marker.setMap(this.map)
-      }
+      this.showMarker(marker);
     } else if (mCount < this.minClusterSize) {
       // Min cluster size not reached so show the marker.
-      if (marker.getMap() !== this.map) {
-        marker.setMap(this.map)
-      }
+      this.showMarker(marker);
     } else if (mCount === this.minClusterSize) {
       // Hide the markers that were showing.
       for (const markerElement of this.markers) {
-        markerElement.setMap(null)
+        this.hideMarker(markerElement);
       }
     } else {
-      marker.setMap(null)
+      this.hideMarker(marker);
     }
 
     return true
   }
 
+  hideMarker(marker: MarkerExtended) {
+    if (marker instanceof google.maps.Marker) {
+      marker.setMap(null);
+    } else {
+      marker.map = null;
+    }
+  }
+
+  showMarker(marker: MarkerExtended) {
+    if (marker instanceof google.maps.Marker) {
+      if (marker.getMap() !== this.map) {
+        marker.setMap(this.map);
+      }
+    } else if(this.map instanceof google.maps.Map) {
+      if (marker.map !== this.map) {
+        marker.map = this.map;
+      }
+    }
+  }
+
   isMarkerInClusterBounds(marker: MarkerExtended): boolean {
     if (this.bounds !== null) {
-      const position = marker.getPosition()
+      const position = (marker instanceof google.maps.Marker)
+        ? marker.getPosition()
+        : marker.position;
 
       if (position) {
         return this.bounds.contains(position)
